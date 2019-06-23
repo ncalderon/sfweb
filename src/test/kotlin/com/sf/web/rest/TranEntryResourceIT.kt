@@ -476,13 +476,13 @@ class TranEntryResourceIT {
             )
 
             // Add required entity
-            val finAcc: FinAcc
-            if (em.findAll(FinAcc::class).isEmpty()) {
+            val finAcc: FinAccEntity
+            if (em.findAll(FinAccEntity::class).isEmpty()) {
                 finAcc = FinAccResourceIT.createEntity(em)
                 em.persist(finAcc)
                 em.flush()
             } else {
-                finAcc = em.findAll(FinAcc::class).get(0)
+                finAcc = em.findAll(FinAccEntity::class).get(0)
             }
             tranEntryEntity.finAcc = finAcc
             return tranEntryEntity
@@ -509,13 +509,13 @@ class TranEntryResourceIT {
             )
 
             // Add required entity
-            val finAcc: FinAcc
-            if (em.findAll(FinAcc::class).isEmpty()) {
+            val finAcc: FinAccEntity
+            if (em.findAll(FinAccEntity::class).isEmpty()) {
                 finAcc = FinAccResourceIT.createUpdatedEntity(em)
                 em.persist(finAcc)
                 em.flush()
             } else {
-                finAcc = em.findAll(FinAcc::class).get(0)
+                finAcc = em.findAll(FinAccEntity::class).get(0)
             }
             tranEntryEntity.finAcc = finAcc
             return tranEntryEntity

@@ -333,13 +333,13 @@ class TranCategoryResourceIT {
             em.flush()
             tranCategoryEntity.user = user
             // Add required entity
-            val budget: Budget
-            if (em.findAll(Budget::class).isEmpty()) {
+            val budget: BudgetEntity
+            if (em.findAll(BudgetEntity::class).isEmpty()) {
                 budget = BudgetResourceIT.createEntity(em)
                 em.persist(budget)
                 em.flush()
             } else {
-                budget = em.findAll(Budget::class).get(0)
+                budget = em.findAll(BudgetEntity::class).get(0)
             }
             tranCategoryEntity.budget = budget
             return tranCategoryEntity
@@ -364,13 +364,13 @@ class TranCategoryResourceIT {
             em.flush()
             tranCategoryEntity.user = user
             // Add required entity
-            val budget: Budget
-            if (em.findAll(Budget::class).isEmpty()) {
+            val budget: BudgetEntity
+            if (em.findAll(BudgetEntity::class).isEmpty()) {
                 budget = BudgetResourceIT.createUpdatedEntity(em)
                 em.persist(budget)
                 em.flush()
             } else {
-                budget = em.findAll(Budget::class).get(0)
+                budget = em.findAll(BudgetEntity::class).get(0)
             }
             tranCategoryEntity.budget = budget
             return tranCategoryEntity

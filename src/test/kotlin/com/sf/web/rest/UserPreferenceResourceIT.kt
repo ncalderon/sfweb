@@ -324,13 +324,13 @@ class UserPreferenceResourceIT {
             em.flush()
             userPreferenceEntity.user = user
             // Add required entity
-            val preference: Preference
-            if (em.findAll(Preference::class).isEmpty()) {
+            val preference: PreferenceEntity
+            if (em.findAll(PreferenceEntity::class).isEmpty()) {
                 preference = PreferenceResourceIT.createEntity(em)
                 em.persist(preference)
                 em.flush()
             } else {
-                preference = em.findAll(Preference::class).get(0)
+                preference = em.findAll(PreferenceEntity::class).get(0)
             }
             userPreferenceEntity.preference = preference
             return userPreferenceEntity
@@ -354,13 +354,13 @@ class UserPreferenceResourceIT {
             em.flush()
             userPreferenceEntity.user = user
             // Add required entity
-            val preference: Preference
-            if (em.findAll(Preference::class).isEmpty()) {
+            val preference: PreferenceEntity
+            if (em.findAll(PreferenceEntity::class).isEmpty()) {
                 preference = PreferenceResourceIT.createUpdatedEntity(em)
                 em.persist(preference)
                 em.flush()
             } else {
-                preference = em.findAll(Preference::class).get(0)
+                preference = em.findAll(PreferenceEntity::class).get(0)
             }
             userPreferenceEntity.preference = preference
             return userPreferenceEntity

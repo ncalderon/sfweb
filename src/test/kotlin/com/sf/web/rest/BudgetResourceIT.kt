@@ -319,13 +319,13 @@ class BudgetResourceIT {
             )
 
             // Add required entity
-            val period: Period
-            if (em.findAll(Period::class).isEmpty()) {
+            val period: PeriodEntity
+            if (em.findAll(PeriodEntity::class).isEmpty()) {
                 period = PeriodResourceIT.createEntity(em)
                 em.persist(period)
                 em.flush()
             } else {
-                period = em.findAll(Period::class).get(0)
+                period = em.findAll(PeriodEntity::class).get(0)
             }
             budgetEntity.period = period
             return budgetEntity
@@ -344,13 +344,13 @@ class BudgetResourceIT {
             )
 
             // Add required entity
-            val period: Period
-            if (em.findAll(Period::class).isEmpty()) {
+            val period: PeriodEntity
+            if (em.findAll(PeriodEntity::class).isEmpty()) {
                 period = PeriodResourceIT.createUpdatedEntity(em)
                 em.persist(period)
                 em.flush()
             } else {
-                period = em.findAll(Period::class).get(0)
+                period = em.findAll(PeriodEntity::class).get(0)
             }
             budgetEntity.period = period
             return budgetEntity
