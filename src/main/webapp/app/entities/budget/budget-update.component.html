@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="sf-budget-heading" jhiTranslate="sfwebApp.budget.home.createOrEditLabel">Create or edit a Budget</h2>
+            <div>
+                <sf-alert-error></sf-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.budget.amount" for="field_amount">Amount</label>
+                    <input type="number" class="form-control" name="amount" id="field_amount"
+                           formControlName="amount"/>
+                    <div *ngIf="editForm.get('amount').invalid && (editForm.get('amount').dirty || editForm.get('amount').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('amount').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('amount')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.budget.tranCategory" for="field_tranCategory">Tran Category</label>
+                    <select class="form-control" id="field_tranCategory" name="tranCategory" formControlName="tranCategoryId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="tranCategoryOption.id" *ngFor="let tranCategoryOption of trancategories; trackBy: trackTranCategoryById">{{tranCategoryOption.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.budget.period" for="field_period">Period</label>
+                    <select class="form-control" id="field_period" name="period" formControlName="periodId">
+                        <option *ngIf="!editForm.get('periodId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="periodOption.id" *ngFor="let periodOption of periods; trackBy: trackPeriodById">{{periodOption.month}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('periodId').invalid && (editForm.get('periodId').dirty || editForm.get('periodId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('periodId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

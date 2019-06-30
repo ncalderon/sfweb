@@ -1,0 +1,89 @@
+{
+    "name": "TranEntry",
+    "fields": [
+        {
+            "fieldName": "tranStatus",
+            "fieldType": "TranStatus",
+            "fieldValues": "RECONCILED,CLEARED,UNCLEARED,VOID",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "tranType",
+            "fieldType": "TranType",
+            "fieldValues": "EXPENSE,INCOME",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "tranNum",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "refNum",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "postDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 256
+        },
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "ccyVal",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "paymentMethod",
+            "fieldType": "PaymentMethod",
+            "fieldValues": "UNSPECIFIED,CASH,CHECK,CREDIT_CARD,DEBIT_CARD,ELECTRONIC_TRANSFER,OTHER"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "finAcc",
+            "otherEntityRelationshipName": "tranEntry",
+            "relationshipValidateRules": "required",
+            "relationshipName": "finAcc",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "tranCategory",
+            "otherEntityRelationshipName": "tranEntry",
+            "relationshipName": "tranCategory",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190630172925",
+    "entityTableName": "tran_entry",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

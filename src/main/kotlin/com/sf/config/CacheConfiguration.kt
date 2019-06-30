@@ -41,6 +41,18 @@ class CacheConfiguration(jHipsterProperties: JHipsterProperties) {
             createCache(cm, com.sf.domain.UserEntity::class.java.name)
             createCache(cm, com.sf.domain.Authority::class.java.name)
             createCache(cm, com.sf.domain.UserEntity::class.java.name + ".authorities")
+            createCache(cm, com.sf.domain.PreferenceEntity::class.java.name)
+            createCache(cm, com.sf.domain.PreferenceEntity::class.java.name + ".userPreferences")
+            createCache(cm, com.sf.domain.UserPreferenceEntity::class.java.name)
+            createCache(cm, com.sf.domain.CurrencyEntity::class.java.name)
+            createCache(cm, com.sf.domain.FinAccEntity::class.java.name)
+            createCache(cm, com.sf.domain.FinAccEntity::class.java.name + ".tranEntries")
+            createCache(cm, com.sf.domain.BudgetEntity::class.java.name)
+            createCache(cm, com.sf.domain.PeriodEntity::class.java.name)
+            createCache(cm, com.sf.domain.PeriodEntity::class.java.name + ".budgets")
+            createCache(cm, com.sf.domain.TranCategoryEntity::class.java.name)
+            createCache(cm, com.sf.domain.TranCategoryEntity::class.java.name + ".tranEntries")
+            createCache(cm, com.sf.domain.TranEntryEntity::class.java.name)
             // jhipster-needle-ehcache-add-entry
         }
     }
