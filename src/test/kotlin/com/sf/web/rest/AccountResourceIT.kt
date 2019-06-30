@@ -3,7 +3,7 @@ package com.sf.web.rest
 import com.sf.SfwebApp
 import com.sf.config.DEFAULT_LANGUAGE
 import com.sf.domain.Authority
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import com.sf.repository.AuthorityRepository
 import com.sf.repository.UserRepository
 import com.sf.security.ADMIN
@@ -126,7 +126,7 @@ class AccountResourceIT {
     fun testGetExistingAccount() {
         val authorities = mutableSetOf(Authority(name = ADMIN))
 
-        val user = User(
+        val user = UserEntity(
             login = "test",
             firstName = "john",
             lastName = "doe",
@@ -484,7 +484,7 @@ class AccountResourceIT {
     @Throws(Exception::class)
     fun testActivateAccount() {
         val activationKey = "some activation key"
-        var user = User(
+        var user = UserEntity(
             login = "activate-account",
             email = "activate-account@example.com",
             password = RandomStringUtils.random(60),
@@ -514,7 +514,7 @@ class AccountResourceIT {
     @WithMockUser("save-account")
     @Throws(Exception::class)
     fun testSaveAccount() {
-        val user = User(
+        val user = UserEntity(
             login = "save-account",
             email = "save-account@example.com",
             password = RandomStringUtils.random(60),
@@ -557,7 +557,7 @@ class AccountResourceIT {
     @WithMockUser("save-invalid-email")
     @Throws(Exception::class)
     fun testSaveInvalidEmail() {
-        val user = User(
+        val user = UserEntity(
             login = "save-invalid-email",
             email = "save-invalid-email@example.com",
             password = RandomStringUtils.random(60),
@@ -592,7 +592,7 @@ class AccountResourceIT {
     @WithMockUser("save-existing-email")
     @Throws(Exception::class)
     fun testSaveExistingEmail() {
-        val user = User(
+        val user = UserEntity(
             login = "save-existing-email",
             email = "save-existing-email@example.com",
             password = RandomStringUtils.random(60),
@@ -601,7 +601,7 @@ class AccountResourceIT {
 
         userRepository.saveAndFlush(user)
 
-        val anotherUser = User(
+        val anotherUser = UserEntity(
             login = "save-existing-email2",
             email = "save-existing-email2@example.com",
             password = RandomStringUtils.random(60),
@@ -637,7 +637,7 @@ class AccountResourceIT {
     @WithMockUser("save-existing-email-and-login")
     @Throws(Exception::class)
     fun testSaveExistingEmailAndLogin() {
-        val user = User(
+        val user = UserEntity(
             login = "save-existing-email-and-login",
             email = "save-existing-email-and-login@example.com",
             password = RandomStringUtils.random(60),
@@ -674,7 +674,7 @@ class AccountResourceIT {
     @Throws(Exception::class)
     fun testChangePasswordWrongExistingPassword() {
         val currentPassword = RandomStringUtils.random(60)
-        val user = User(
+        val user = UserEntity(
             password = passwordEncoder.encode(currentPassword),
             login = "change-password-wrong-existing-password",
             email = "change-password-wrong-existing-password@example.com"
@@ -700,7 +700,7 @@ class AccountResourceIT {
     @Throws(Exception::class)
     fun testChangePassword() {
         val currentPassword = RandomStringUtils.random(60)
-        val user = User(
+        val user = UserEntity(
             password = passwordEncoder.encode(currentPassword),
             login = "change-password",
             email = "change-password@example.com"
@@ -725,7 +725,7 @@ class AccountResourceIT {
     @Throws(Exception::class)
     fun testChangePasswordTooSmall() {
         val currentPassword = RandomStringUtils.random(60)
-        val user = User(
+        val user = UserEntity(
             password = passwordEncoder.encode(currentPassword),
             login = "change-password-too-small",
             email = "change-password-too-small@example.com"
@@ -752,7 +752,7 @@ class AccountResourceIT {
     @Throws(Exception::class)
     fun testChangePasswordTooLong() {
         val currentPassword = RandomStringUtils.random(60)
-        val user = User(
+        val user = UserEntity(
             password = passwordEncoder.encode(currentPassword),
             login = "change-password-too-long",
             email = "change-password-too-long@example.com"
@@ -779,7 +779,7 @@ class AccountResourceIT {
     @Throws(Exception::class)
     fun testChangePasswordEmpty() {
         val currentPassword = RandomStringUtils.random(60)
-        val user = User(
+        val user = UserEntity(
             password = passwordEncoder.encode(currentPassword),
             login = "change-password-empty",
             email = "change-password-empty@example.com"
@@ -802,7 +802,7 @@ class AccountResourceIT {
     @Transactional
     @Throws(Exception::class)
     fun testRequestPasswordReset() {
-        val user = User(
+        val user = UserEntity(
             password = RandomStringUtils.random(60),
             activated = true,
             login = "password-reset",
@@ -822,7 +822,7 @@ class AccountResourceIT {
     @Transactional
     @Throws(Exception::class)
     fun testRequestPasswordResetUpperCaseEmail() {
-        val user = User(
+        val user = UserEntity(
             password = RandomStringUtils.random(60),
             activated = true,
             login = "password-reset",
@@ -852,7 +852,7 @@ class AccountResourceIT {
     @Transactional
     @Throws(Exception::class)
     fun testFinishPasswordReset() {
-        val user = User(
+        val user = UserEntity(
             password = RandomStringUtils.random(60),
             login = "finish-password-reset",
             email = "finish-password-reset@example.com",
@@ -879,7 +879,7 @@ class AccountResourceIT {
     @Transactional
     @Throws(Exception::class)
     fun testFinishPasswordResetTooSmall() {
-        val user = User(
+        val user = UserEntity(
             password = RandomStringUtils.random(60),
             login = "finish-password-reset-too-small",
             email = "finish-password-reset-too-small@example.com",

@@ -1,13 +1,13 @@
 package com.sf.service.mapper
 
 import com.sf.domain.Authority
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import com.sf.service.dto.UserDTO
 
 import org.springframework.stereotype.Service
 
 /**
- * Mapper for the entity [User] and its DTO called [UserDTO].
+ * Mapper for the entity [UserEntity] and its DTO called [UserDTO].
  *
  * Normal mappers are generated using MapStruct, this one is hand-coded as MapStruct
  * support is still in beta, and requires a manual step with an IDE.
@@ -15,27 +15,27 @@ import org.springframework.stereotype.Service
 @Service
 class UserMapper {
 
-    fun usersToUserDTOs(users: List<User?>): MutableList<UserDTO> {
+    fun usersToUserDTOs(users: List<UserEntity?>): MutableList<UserDTO> {
         return users.asSequence()
             .filterNotNull()
             .mapTo(mutableListOf()) { this.userToUserDTO(it) }
     }
 
-    fun userToUserDTO(user: User): UserDTO {
+    fun userToUserDTO(user: UserEntity): UserDTO {
         return UserDTO(user)
     }
 
-    fun userDTOsToUsers(userDTOs: List<UserDTO?>): MutableList<User> {
+    fun userDTOsToUsers(userDTOs: List<UserDTO?>): MutableList<UserEntity> {
         return userDTOs.asSequence()
             .map { userDTOToUser(it) }
             .filterNotNullTo(mutableListOf())
     }
 
-    fun userDTOToUser(userDTO: UserDTO?): User? {
+    fun userDTOToUser(userDTO: UserDTO?): UserEntity? {
         return when (userDTO) {
             null -> null
             else -> {
-                User(
+                UserEntity(
                     id = userDTO.id,
                     login = userDTO.login,
                     firstName = userDTO.firstName,
@@ -54,7 +54,7 @@ class UserMapper {
         return authoritiesAsString?.mapTo(mutableSetOf()) { Authority(name = it) } ?: mutableSetOf()
     }
 
-    fun userFromId(id: Long?): User? {
-        return id?.let { User(id = it) }
+    fun userFromId(id: Long?): UserEntity? {
+        return id?.let { UserEntity(id = it) }
     }
 }

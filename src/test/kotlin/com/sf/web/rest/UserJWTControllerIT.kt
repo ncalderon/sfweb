@@ -1,7 +1,7 @@
 package com.sf.web.rest
 
 import com.sf.SfwebApp
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import com.sf.repository.UserRepository
 import com.sf.security.jwt.TokenProvider
 import com.sf.web.rest.errors.ExceptionTranslator
@@ -59,7 +59,7 @@ class UserJWTControllerIT {
     @Transactional
     @Throws(Exception::class)
     fun testAuthorize() {
-        val user = User(
+        val user = UserEntity(
             login = "user-jwt-controller",
             email = "user-jwt-controller@example.com",
             activated = true,
@@ -83,7 +83,7 @@ class UserJWTControllerIT {
     @Transactional
     @Throws(Exception::class)
     fun testAuthorizeWithRememberMe() {
-        val user = User(
+        val user = UserEntity(
             login = "user-jwt-controller-remember-me",
             email = "user-jwt-controller-remember-me@example.com",
             activated = true,

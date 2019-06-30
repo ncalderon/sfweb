@@ -13,11 +13,11 @@ import {
   UserMgmtUpdateComponent,
   UserMgmtDeleteDialogComponent,
   LogsComponent,
-  JhiMetricsMonitoringComponent,
-  JhiHealthModalComponent,
-  JhiHealthCheckComponent,
-  JhiConfigurationComponent,
-  JhiDocsComponent
+  SfMetricsMonitoringComponent,
+  SfHealthModalComponent,
+  SfHealthCheckComponent,
+  SfConfigurationComponent,
+  SfDocsComponent
 } from './';
 
 @NgModule({
@@ -33,14 +33,14 @@ import {
     UserMgmtUpdateComponent,
     UserMgmtDeleteDialogComponent,
     LogsComponent,
-    JhiConfigurationComponent,
-    JhiHealthCheckComponent,
-    JhiHealthModalComponent,
-    JhiDocsComponent,
-    JhiMetricsMonitoringComponent
+    SfConfigurationComponent,
+    SfHealthCheckComponent,
+    SfHealthModalComponent,
+    SfDocsComponent,
+    SfMetricsMonitoringComponent
   ],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
-  entryComponents: [UserMgmtDeleteDialogComponent, JhiHealthModalComponent],
+  entryComponents: [UserMgmtDeleteDialogComponent, SfHealthModalComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SfwebAdminModule {

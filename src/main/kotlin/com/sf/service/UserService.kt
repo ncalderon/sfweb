@@ -4,7 +4,7 @@ import com.sf.config.ANONYMOUS_USER
 import com.sf.config.DEFAULT_LANGUAGE
 import com.sf.config.SYSTEM_ACCOUNT
 import com.sf.domain.Authority
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import com.sf.repository.AuthorityRepository
 import com.sf.repository.UserRepository
 import com.sf.security.USER
@@ -44,7 +44,7 @@ class UserService(
 
     private val log = LoggerFactory.getLogger(UserService::class.java)
 
-    fun activateRegistration(key: String): Optional<User> {
+    fun activateRegistration(key: String): Optional<UserEntity> {
         log.debug("Activating user for activation key {}", key)
         return userRepository.findOneByActivationKey(key)
             .map { user ->
@@ -57,7 +57,7 @@ class UserService(
             }
     }
 
-    fun completePasswordReset(newPassword: String, key: String): Optional<User> {
+    fun completePasswordReset(newPassword: String, key: String): Optional<UserEntity> {
         log.debug("Reset user password for reset key {}", key)
         return userRepository.findOneByResetKey(key)
             .filter { user -> user.resetDate?.isAfter(Instant.now().minusSeconds(86400)) ?: false }
@@ -70,9 +70,9 @@ class UserService(
             }
     }
 
-    fun requestPasswordReset(mail: String): Optional<User> {
+    fun requestPasswordReset(mail: String): Optional<UserEntity> {
         return userRepository.findOneByEmailIgnoreCase(mail)
-            .filter(User::activated)
+            .filter(UserEntity::activated)
             .map { user ->
                 user.resetKey = generateResetKey()
                 user.resetDate = Instant.now()
@@ -81,7 +81,7 @@ class UserService(
             }
     }
 
-    fun registerUser(userDTO: UserDTO, password: String): User {
+    fun registerUser(userDTO: UserDTO, password: String): UserEntity {
         val login = userDTO.login ?: throw IllegalArgumentException("Empty login not allowed")
         val email = userDTO.email ?: throw IllegalArgumentException("Empty email not allowed")
         userRepository.findOneByLogin(login.toLowerCase()).ifPresent { existingUser ->
@@ -96,7 +96,7 @@ class UserService(
                 throw EmailAlreadyUsedException()
             }
         }
-        val newUser = User()
+        val newUser = UserEntity()
         val encryptedPassword = passwordEncoder.encode(password)
         newUser.apply {
             this.login = login.toLowerCase()
@@ -120,7 +120,7 @@ class UserService(
         return newUser
     }
 
-    private fun removeNonActivatedUser(existingUser: User): Boolean {
+    private fun removeNonActivatedUser(existingUser: UserEntity): Boolean {
         if (existingUser.activated) {
             return false
         }
@@ -130,9 +130,9 @@ class UserService(
         return true
     }
 
-    fun createUser(userDTO: UserDTO): User {
+    fun createUser(userDTO: UserDTO): UserEntity {
         val encryptedPassword = passwordEncoder.encode(generatePassword())
-        val user = User(
+        val user = UserEntity(
             login = userDTO.login?.toLowerCase(),
             firstName = userDTO.firstName,
             lastName = userDTO.lastName,
@@ -188,7 +188,7 @@ class UserService(
      */
     fun updateUser(userDTO: UserDTO): Optional<UserDTO> {
         return Optional.of(userRepository.findById(userDTO.id!!))
-            .filter(Optional<User>::isPresent)
+            .filter(Optional<UserEntity>::isPresent)
             .map { it.get() }
             .map { user ->
                 clearUserCaches(user)
@@ -276,7 +276,7 @@ class UserService(
     }
 
 
-    private fun clearUserCaches(user: User) {
+    private fun clearUserCaches(user: UserEntity) {
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE)?.evict(user.login!!)
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)?.evict(user.email!!)
     }

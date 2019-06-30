@@ -1,7 +1,7 @@
 package com.sf.service.dto
 
 import com.sf.config.LOGIN_REGEX
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
@@ -50,7 +50,7 @@ open class UserDTO(
     var authorities: Set<String>? = null
 
 ) {
-    constructor(user: User) :
+    constructor(user: UserEntity) :
         this(
             user.id, user.login, user.firstName, user.lastName, user.email,
             user.imageUrl, user.activated, user.langKey,

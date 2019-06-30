@@ -21,7 +21,8 @@
     "serviceDiscoveryType": "eureka",
     "buildTool": "maven",
     "enableSwaggerCodegen": false,
-    "jwtSecretKey": "YjRkNzUwYzlmOTllMWJmMzFmM2VkZDA0ZDcxNmNiNmZhNjVjNDUwOTQxOTQ1YmY0OTQyMDk4OTJjODA4NWFhNTkzYzIyMjMzMWFmOWEzMDAyOGNkYjFjOGZlMmEwY2ZmNjIyODllMjI3YTc3NmY2YjY2MDRjZTc3MDJjMDJlN2U="
+    "jwtSecretKey": "YjRkNzUwYzlmOTllMWJmMzFmM2VkZDA0ZDcxNmNiNmZhNjVjNDUwOTQxOTQ1YmY0OTQyMDk4OTJjODA4NWFhNTkzYzIyMjMzMWFmOWEzMDAyOGNkYjFjOGZlMmEwY2ZmNjIyODllMjI3YTc3NmY2YjY2MDRjZTc3MDJjMDJlN2U=",
+    "enableTranslation": true
   },
   "generator-jhipster": {
     "promptValues": {
@@ -35,12 +36,9 @@
     "clientFramework": "angularX",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "testFrameworks": [
-      "cucumber",
-      "protractor"
-    ],
-    "jhiPrefix": "jhi",
-    "entitySuffix": "",
+    "testFrameworks": ["cucumber", "protractor"],
+    "jhiPrefix": "sf",
+    "entitySuffix": "Entity",
     "dtoSuffix": "DTO",
     "otherModules": [
       {
@@ -50,10 +48,7 @@
     ],
     "enableTranslation": true,
     "nativeLanguage": "en",
-    "languages": [
-      "en",
-      "es"
-    ],
+    "languages": ["en", "es"],
     "blueprint": "generator-jhipster-kotlin",
     "blueprintVersion": "1.0.0"
   }

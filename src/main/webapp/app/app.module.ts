@@ -19,12 +19,12 @@ import { SfwebAccountModule } from './account/account.module';
 import { SfwebEntityModule } from './entities/entity.module';
 import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
-import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import { SfMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
 @NgModule({
   imports: [
     BrowserModule,
-    NgxWebstorageModule.forRoot({ prefix: 'jhi', separator: '-' }),
+    NgxWebstorageModule.forRoot({ prefix: 'sf', separator: '-' }),
     NgJhipsterModule.forRoot({
       // set below to true to make alerts look like toast
       alertAsToast: false,
@@ -40,7 +40,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
     SfwebEntityModule,
     SfwebAppRoutingModule
   ],
-  declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [SfMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
@@ -63,7 +63,7 @@ import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent
       multi: true
     }
   ],
-  bootstrap: [JhiMainComponent]
+  bootstrap: [SfMainComponent]
 })
 export class SfwebAppModule {
   constructor(private dpConfig: NgbDatepickerConfig) {

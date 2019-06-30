@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { SfwebSharedLibsModule, FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent } from './';
+import { SfwebSharedLibsModule, FindLanguageFromKeyPipe, SfAlertComponent, SfAlertErrorComponent } from './';
 
 @NgModule({
   imports: [SfwebSharedLibsModule],
-  declarations: [FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent],
-  exports: [SfwebSharedLibsModule, FindLanguageFromKeyPipe, JhiAlertComponent, JhiAlertErrorComponent]
+  declarations: [FindLanguageFromKeyPipe, SfAlertComponent, SfAlertErrorComponent],
+  exports: [SfwebSharedLibsModule, FindLanguageFromKeyPipe, SfAlertComponent, SfAlertErrorComponent]
 })
 export class SfwebSharedCommonModule {}

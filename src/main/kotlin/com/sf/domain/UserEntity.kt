@@ -30,9 +30,9 @@ import java.util.Locale
  * A user.
  */
 @Entity
-@Table(name = "jhi_user")
+@Table(name = "sf_user")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-class User @JvmOverloads constructor(
+class UserEntity @JvmOverloads constructor(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -87,7 +87,7 @@ class User @JvmOverloads constructor(
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-        name = "jhi_user_authority",
+        name = "sf_user_authority",
         joinColumns = [JoinColumn(name = "user_id", referencedColumnName = "id")],
         inverseJoinColumns = [JoinColumn(name = "authority_name", referencedColumnName = "name")])
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -112,7 +112,7 @@ class User @JvmOverloads constructor(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is User) return false
+        if (other !is UserEntity) return false
         if (other.id == null || id == null) return false
 
         return id == other.id
@@ -121,7 +121,7 @@ class User @JvmOverloads constructor(
     override fun hashCode() = 31
 
     override fun toString() =
-        "User{" +
+        "UserEntity{" +
             "login='" + login + '\'' +
             ", firstName='" + firstName + '\'' +
             ", lastName='" + lastName + '\'' +

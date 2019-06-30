@@ -3,7 +3,7 @@ package com.sf.service
 import com.sf.SfwebApp
 import com.sf.config.ANONYMOUS_USER
 import com.sf.config.DEFAULT_LANGUAGE
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import com.sf.repository.UserRepository
 import com.sf.service.util.generateResetKey
 
@@ -46,11 +46,11 @@ class UserServiceIT {
     @Mock
     private lateinit var dateTimeProvider: DateTimeProvider
 
-    private lateinit var user: User
+    private lateinit var user: UserEntity
 
     @BeforeEach
     fun init() {
-        user = User(
+        user = UserEntity(
             login = DEFAULT_LOGIN,
             password = RandomStringUtils.random(60),
             activated = true,

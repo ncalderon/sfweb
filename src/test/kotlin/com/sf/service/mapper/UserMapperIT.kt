@@ -1,7 +1,7 @@
 package com.sf.service.mapper
 
 import com.sf.SfwebApp
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import com.sf.service.dto.UserDTO
 import org.apache.commons.lang3.RandomStringUtils
 import org.junit.jupiter.api.BeforeEach
@@ -22,12 +22,12 @@ class UserMapperIT {
     @Autowired
     private lateinit var userMapper: UserMapper
 
-    private lateinit var user: User
+    private lateinit var user: UserEntity
     private lateinit var userDto: UserDTO
 
     @BeforeEach
     fun init() {
-        user = User(
+        user = UserEntity(
             login = DEFAULT_LOGIN,
             password = RandomStringUtils.random(60),
             activated = true,

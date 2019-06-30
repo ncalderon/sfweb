@@ -1,6 +1,6 @@
 package com.sf.security
 
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import com.sf.repository.UserRepository
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator
 import org.slf4j.LoggerFactory
@@ -37,7 +37,7 @@ class DomainUserDetailsService(private val userRepository: UserRepository) : Use
             .orElseThrow { UsernameNotFoundException("User $lowercaseLogin was not found in the database") }
     }
 
-    private fun createSpringSecurityUser(lowercaseLogin: String, user: User): org.springframework.security.core.userdetails.User {
+    private fun createSpringSecurityUser(lowercaseLogin: String, user: UserEntity): org.springframework.security.core.userdetails.User {
         if (!user.activated) {
             throw UserNotActivatedException("User $lowercaseLogin was not activated")
         }

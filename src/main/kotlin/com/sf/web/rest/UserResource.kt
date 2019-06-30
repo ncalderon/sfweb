@@ -1,7 +1,7 @@
 package com.sf.web.rest
 
 import com.sf.config.LOGIN_REGEX
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import com.sf.repository.UserRepository
 import com.sf.security.ADMIN
 import com.sf.service.MailService
@@ -41,7 +41,7 @@ import java.net.URISyntaxException
 /**
  * REST controller for managing users.
  *
- * This class accesses the [User] entity, and needs to fetch its collection of authorities.
+ * This class accesses the [UserEntity] entity, and needs to fetch its collection of authorities.
  *
  * For a normal use-case, it would be better to have an eager relationship between User and Authority,
  * and send everything to the client side: there would be no View Model and DTO, a lot less code, and an outer-join
@@ -89,7 +89,7 @@ class UserResource(
     @PostMapping("/users")
     @PreAuthorize("hasRole(\"" + ADMIN + "\")")
     @Throws(URISyntaxException::class)
-    fun createUser(@Valid @RequestBody userDTO: UserDTO): ResponseEntity<User> {
+    fun createUser(@Valid @RequestBody userDTO: UserDTO): ResponseEntity<UserEntity> {
         log.debug("REST request to save User : {}", userDTO)
 
         if (userDTO.id != null) {

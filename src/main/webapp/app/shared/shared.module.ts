@@ -1,11 +1,11 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { SfwebSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective } from './';
+import { SfwebSharedCommonModule, SfLoginModalComponent, HasAnyAuthorityDirective } from './';
 
 @NgModule({
   imports: [SfwebSharedCommonModule],
-  declarations: [JhiLoginModalComponent, HasAnyAuthorityDirective],
-  entryComponents: [JhiLoginModalComponent],
-  exports: [SfwebSharedCommonModule, JhiLoginModalComponent, HasAnyAuthorityDirective],
+  declarations: [SfLoginModalComponent, HasAnyAuthorityDirective],
+  entryComponents: [SfLoginModalComponent],
+  exports: [SfwebSharedCommonModule, SfLoginModalComponent, HasAnyAuthorityDirective],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SfwebSharedModule {

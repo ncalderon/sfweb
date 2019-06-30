@@ -6,7 +6,7 @@ import { AccountService, JhiLanguageHelper } from 'app/core';
 import { Account } from 'app/core/user/account.model';
 
 @Component({
-  selector: 'jhi-settings',
+  selector: 'sf-settings',
   templateUrl: './settings.component.html'
 })
 export class SettingsComponent implements OnInit {

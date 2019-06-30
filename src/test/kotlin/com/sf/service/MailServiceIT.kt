@@ -3,7 +3,7 @@ package com.sf.service
 import com.sf.config.DEFAULT_LANGUAGE
 
 import com.sf.SfwebApp
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import io.github.jhipster.config.JHipsterProperties
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -132,7 +132,7 @@ class MailServiceIT {
 
     @Test
     fun testSendEmailFromTemplate() {
-        val user = User(
+        val user = UserEntity(
             login = "john",
             email = "john.doe@example.com",
             langKey = "en"
@@ -149,7 +149,7 @@ class MailServiceIT {
 
     @Test
     fun testSendActivationEmail() {
-        val user = User(
+        val user = UserEntity(
             langKey = DEFAULT_LANGUAGE,
             login = "john",
             email = "john.doe@example.com"
@@ -165,7 +165,7 @@ class MailServiceIT {
 
     @Test
     fun testCreationEmail() {
-        val user = User(
+        val user = UserEntity(
             langKey = DEFAULT_LANGUAGE,
             login = "john",
             email = "john.doe@example.com"
@@ -181,7 +181,7 @@ class MailServiceIT {
 
     @Test
     fun testSendPasswordResetMail() {
-        val user = User(
+        val user = UserEntity(
             langKey = DEFAULT_LANGUAGE,
             login = "john",
             email = "john.doe@example.com"
@@ -205,7 +205,7 @@ class MailServiceIT {
 
     @Test
     fun testSendLocalizedEmailForAllSupportedLanguages() {
-        val user = User(
+        val user = UserEntity(
             login = "john",
             email = "john.doe@example.com"
         )

@@ -9,7 +9,7 @@ import { LoginModalService } from 'app/core';
 import { Register } from './register.service';
 
 @Component({
-  selector: 'jhi-register',
+  selector: 'sf-register',
   templateUrl: './register.component.html'
 })
 export class RegisterComponent implements OnInit, AfterViewInit {

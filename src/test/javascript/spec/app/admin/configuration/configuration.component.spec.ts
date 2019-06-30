@@ -3,31 +3,31 @@ import { of } from 'rxjs';
 import { HttpHeaders, HttpResponse } from '@angular/common/http';
 
 import { SfwebTestModule } from '../../../test.module';
-import { JhiConfigurationComponent } from 'app/admin/configuration/configuration.component';
-import { JhiConfigurationService } from 'app/admin/configuration/configuration.service';
+import { SfConfigurationComponent } from 'app/admin/configuration/configuration.component';
+import { SfConfigurationService } from 'app/admin/configuration/configuration.service';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { Log } from 'app/admin';
 
 describe('Component Tests', () => {
-  describe('JhiConfigurationComponent', () => {
-    let comp: JhiConfigurationComponent;
-    let fixture: ComponentFixture<JhiConfigurationComponent>;
-    let service: JhiConfigurationService;
+  describe('SfConfigurationComponent', () => {
+    let comp: SfConfigurationComponent;
+    let fixture: ComponentFixture<SfConfigurationComponent>;
+    let service: SfConfigurationService;
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [SfwebTestModule],
-        declarations: [JhiConfigurationComponent],
-        providers: [JhiConfigurationService]
+        declarations: [SfConfigurationComponent],
+        providers: [SfConfigurationService]
       })
-        .overrideTemplate(JhiConfigurationComponent, '')
+        .overrideTemplate(SfConfigurationComponent, '')
         .compileComponents();
     }));
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(JhiConfigurationComponent);
+      fixture = TestBed.createComponent(SfConfigurationComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(JhiConfigurationService);
+      service = fixture.debugElement.injector.get(SfConfigurationService);
     });
 
     describe('OnInit', () => {

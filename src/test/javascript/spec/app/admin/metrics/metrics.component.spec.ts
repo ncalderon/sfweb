@@ -3,28 +3,28 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { of, throwError } from 'rxjs';
 
 import { SfwebTestModule } from '../../../test.module';
-import { JhiMetricsMonitoringComponent } from 'app/admin/metrics/metrics.component';
-import { JhiMetricsService } from 'app/admin/metrics/metrics.service';
+import { SfMetricsMonitoringComponent } from 'app/admin/metrics/metrics.component';
+import { SfMetricsService } from 'app/admin/metrics/metrics.service';
 
 describe('Component Tests', () => {
-  describe('JhiMetricsMonitoringComponent', () => {
-    let comp: JhiMetricsMonitoringComponent;
-    let fixture: ComponentFixture<JhiMetricsMonitoringComponent>;
-    let service: JhiMetricsService;
+  describe('SfMetricsMonitoringComponent', () => {
+    let comp: SfMetricsMonitoringComponent;
+    let fixture: ComponentFixture<SfMetricsMonitoringComponent>;
+    let service: SfMetricsService;
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [SfwebTestModule],
-        declarations: [JhiMetricsMonitoringComponent]
+        declarations: [SfMetricsMonitoringComponent]
       })
-        .overrideTemplate(JhiMetricsMonitoringComponent, '')
+        .overrideTemplate(SfMetricsMonitoringComponent, '')
         .compileComponents();
     }));
 
     beforeEach(() => {
-      fixture = TestBed.createComponent(JhiMetricsMonitoringComponent);
+      fixture = TestBed.createComponent(SfMetricsMonitoringComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(JhiMetricsService);
+      service = fixture.debugElement.injector.get(SfMetricsService);
     });
 
     describe('refresh', () => {

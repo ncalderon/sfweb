@@ -10,7 +10,7 @@ import { AccountService, UserService, User } from 'app/core';
 import { UserMgmtDeleteDialogComponent } from './user-management-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-user-mgmt',
+  selector: 'sf-user-mgmt',
   templateUrl: './user-management.component.html'
 })
 export class UserMgmtComponent implements OnInit, OnDestroy {

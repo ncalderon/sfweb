@@ -2,7 +2,7 @@ package com.sf.web.rest
 
 import com.sf.SfwebApp
 import com.sf.domain.Authority
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import com.sf.repository.UserRepository
 import com.sf.security.ADMIN
 import com.sf.security.USER
@@ -76,7 +76,7 @@ class UserResourceIT {
 
     private lateinit var restUserMockMvc: MockMvc
 
-    private lateinit var user: User
+    private lateinit var user: UserEntity
 
     @BeforeEach
     fun setup() {
@@ -375,7 +375,7 @@ class UserResourceIT {
         // Initialize the database with 2 users
         userRepository.saveAndFlush(user)
 
-        val anotherUser = User(
+        val anotherUser = UserEntity(
             login = "jhipster",
             password = RandomStringUtils.random(60),
             activated = true,
@@ -421,7 +421,7 @@ class UserResourceIT {
         // Initialize the database
         userRepository.saveAndFlush(user)
 
-        val anotherUser = User(
+        val anotherUser = UserEntity(
             login = "jhipster",
             password = RandomStringUtils.random(60),
             activated = true,
@@ -497,9 +497,9 @@ class UserResourceIT {
     @Transactional
     @Throws(Exception::class)
     fun testUserEquals() {
-        equalsVerifier(User::class)
-        val user1 = User(id = 1L)
-        val user2 = User(id = user1.id)
+        equalsVerifier(UserEntity::class)
+        val user1 = UserEntity(id = 1L)
+        val user2 = UserEntity(id = user1.id)
         assertThat(user1).isEqualTo(user2)
         user2.id = 2L
         assertThat(user1).isNotEqualTo(user2)
@@ -622,8 +622,8 @@ class UserResourceIT {
          * if they test an entity which has a required relationship to the User entity.
          */
         @JvmStatic
-        fun createEntity(em: EntityManager?): User {
-            return User(
+        fun createEntity(em: EntityManager?): UserEntity {
+            return UserEntity(
                 login = DEFAULT_LOGIN + RandomStringUtils.randomAlphabetic(5),
                 password = RandomStringUtils.random(60),
                 activated = true,

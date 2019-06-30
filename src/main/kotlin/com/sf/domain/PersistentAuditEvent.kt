@@ -20,7 +20,7 @@ import java.time.Instant
  * @see org.springframework.boot.actuate.audit.AuditEvent
  */
 @Entity
-@Table(name = "jhi_persistent_audit_event")
+@Table(name = "sf_persistent_audit_event")
 class PersistentAuditEvent(
 
     @Id
@@ -44,7 +44,7 @@ class PersistentAuditEvent(
     @ElementCollection
     @MapKeyColumn(name = "name")
     @Column(name = "value")
-    @CollectionTable(name = "jhi_persistent_audit_evt_data", joinColumns = [JoinColumn(name = "event_id")])
+    @CollectionTable(name = "sf_persistent_audit_evt_data", joinColumns = [JoinColumn(name = "event_id")])
     var data: MutableMap<String, String?> = mutableMapOf()
 
 ) : Serializable {

@@ -61,8 +61,8 @@
       }
     ],
 
-    "directive-selector": [true, "attribute", "jhi", "camelCase"],
-    "component-selector": [true, "element", "jhi", "kebab-case"],
+    "directive-selector": [true, "attribute", "sf", "camelCase"],
+    "component-selector": [true, "element", "sf", "kebab-case"],
     "no-inputs-metadata-property": true,
     "no-outputs-metadata-property": true,
     "no-host-metadata-property": true,

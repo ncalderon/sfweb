@@ -16,7 +16,7 @@ import java.time.OffsetTime
 import java.time.ZonedDateTime
 
 @Entity
-@Table(name = "jhi_date_time_wrapper")
+@Table(name = "sf_date_time_wrapper")
 class DateTimeWrapper(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

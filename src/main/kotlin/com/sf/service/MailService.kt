@@ -1,6 +1,6 @@
 package com.sf.service
 
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 
 import io.github.jhipster.config.JHipsterProperties
 
@@ -65,7 +65,7 @@ class MailService(
     }
 
     @Async
-    fun sendEmailFromTemplate(user: User, templateName: String, titleKey: String) {
+    fun sendEmailFromTemplate(user: UserEntity, templateName: String, titleKey: String) {
         val locale = Locale.forLanguageTag(user.langKey)
         val context = Context(locale).apply {
             setVariable(USER, user)
@@ -77,19 +77,19 @@ class MailService(
     }
 
     @Async
-    fun sendActivationEmail(user: User) {
+    fun sendActivationEmail(user: UserEntity) {
         log.debug("Sending activation email to '{}'", user.email)
         sendEmailFromTemplate(user, "mail/activationEmail", "email.activation.title")
     }
 
     @Async
-    fun sendCreationEmail(user: User) {
+    fun sendCreationEmail(user: UserEntity) {
         log.debug("Sending creation email to '{}'", user.email)
         sendEmailFromTemplate(user, "mail/creationEmail", "email.activation.title")
     }
 
     @Async
-    fun sendPasswordResetMail(user: User) {
+    fun sendPasswordResetMail(user: UserEntity) {
         log.debug("Sending password reset email to '{}'", user.email)
         sendEmailFromTemplate(user, "mail/passwordResetEmail", "email.reset.title")
     }

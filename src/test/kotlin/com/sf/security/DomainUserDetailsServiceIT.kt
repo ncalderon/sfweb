@@ -1,7 +1,7 @@
 package com.sf.security
 
 import com.sf.SfwebApp
-import com.sf.domain.User
+import com.sf.domain.UserEntity
 import com.sf.repository.UserRepository
 
 import org.apache.commons.lang3.RandomStringUtils
@@ -31,13 +31,13 @@ class DomainUserDetailsServiceIT {
     @Autowired
     private lateinit var domainUserDetailsService: UserDetailsService
 
-    private lateinit var userOne: User
-    private lateinit var userTwo: User
-    private lateinit var userThree: User
+    private lateinit var userOne: UserEntity
+    private lateinit var userTwo: UserEntity
+    private lateinit var userThree: UserEntity
 
     @BeforeEach
     fun init() {
-        userOne = User(
+        userOne = UserEntity(
             login = USER_ONE_LOGIN,
             password = RandomStringUtils.random(60),
             activated = true,
@@ -48,7 +48,7 @@ class DomainUserDetailsServiceIT {
         )
         userRepository.save(userOne)
 
-        userTwo = User(
+        userTwo = UserEntity(
             login = USER_TWO_LOGIN,
             password = RandomStringUtils.random(60),
             activated = true,
@@ -59,7 +59,7 @@ class DomainUserDetailsServiceIT {
         )
         userRepository.save(userTwo)
 
-        userThree = User(
+        userThree = UserEntity(
             login = USER_THREE_LOGIN,
             password = RandomStringUtils.random(60),
             activated = false,

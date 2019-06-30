@@ -38,9 +38,9 @@ class CacheConfiguration(jHipsterProperties: JHipsterProperties) {
         return JCacheManagerCustomizer { cm ->
             createCache(cm, com.sf.repository.UserRepository.USERS_BY_LOGIN_CACHE)
             createCache(cm, com.sf.repository.UserRepository.USERS_BY_EMAIL_CACHE)
-            createCache(cm, com.sf.domain.User::class.java.name)
+            createCache(cm, com.sf.domain.UserEntity::class.java.name)
             createCache(cm, com.sf.domain.Authority::class.java.name)
-            createCache(cm, com.sf.domain.User::class.java.name + ".authorities")
+            createCache(cm, com.sf.domain.UserEntity::class.java.name + ".authorities")
             // jhipster-needle-ehcache-add-entry
         }
     }
