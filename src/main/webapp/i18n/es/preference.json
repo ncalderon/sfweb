@@ -5,7 +5,7 @@
         "title": "Preferences",
         "createLabel": "Crear nuevo Preference",
         "createOrEditLabel": "Crear o editar Preference",
-        "notFound": "No Preference found"
+        "notFound": "No Preferences found"
       },
       "created": "Un nuevo Preference ha sido creado con el identificador {{ param }}",
       "updated": "Un Preference ha sido actualizado con el identificador {{ param }}",

@@ -1,11 +1,11 @@
 id;tran_status;tran_type;tran_num;ref_num;post_date;description;amount;ccy_val;payment_method;fin_acc_id
-1;RECONCILED;EXPENSE;Buckinghamshire monetize;Direct;2019-06-30;Industrial;90538;84714;CHECK;10
-2;CLEARED;INCOME;Money Market Account;Danish Krone parse;2019-06-29;back-end Unbranded Cambridgeshire;5755;99593;CHECK;8
-3;CLEARED;INCOME;infomediaries;Fantastic Fresh Salad;2019-06-30;Sleek;8483;23322;OTHER;3
-4;CLEARED;INCOME;Triple-buffered array;Bedfordshire Tools;2019-06-30;Handmade Wooden Cheese Fresh;64921;74421;CREDIT_CARD;5
-5;CLEARED;EXPENSE;Strategist;Incredible Fresh Car Tuvalu;2019-06-29;Gorgeous Rubber Chicken Associate Central African Republic;62939;21680;UNSPECIFIED;4
-6;VOID;INCOME;Generic B2B;olive;2019-06-30;one-to-one Indiana;7773;36034;CHECK;3
-7;UNCLEARED;INCOME;Licensed Usability models;Personal Loan Account markets;2019-06-29;EXE Rustic Steel Shirt drive;81055;48037;OTHER;4
-8;RECONCILED;EXPENSE;Refined;haptic Producer Agent;2019-06-30;input Accounts;84964;37785;OTHER;3
-9;VOID;INCOME;SMTP;Checking Account global Steel;2019-06-30;Kyrgyz Republic transmit;52016;30777;UNSPECIFIED;8
-10;UNCLEARED;EXPENSE;digital Corporate Checking Account;seamless New York mesh;2019-06-30;International;34825;54744;CHECK;3
+1;CLEARED;EXPENSE;Buckinghamshire monetize;Direct;2019-08-04;Industrial;90538;84714;DEBIT_CARD;10
+2;VOID;EXPENSE;Money Market Account;Danish Krone parse;2019-08-04;back-end Unbranded Cambridgeshire;5755;99593;DEBIT_CARD;8
+3;CLEARED;INCOME;infomediaries;Fantastic Fresh Salad;2019-08-04;Sleek;8483;23322;DEBIT_CARD;3
+4;CLEARED;EXPENSE;Triple-buffered array;Bedfordshire Tools;2019-08-04;Handmade Wooden Cheese Fresh;64921;74421;DEBIT_CARD;5
+5;VOID;INCOME;Strategist;Incredible Fresh Car Tuvalu;2019-08-04;Gorgeous Rubber Chicken Associate Central African Republic;62939;21680;OTHER;4
+6;UNCLEARED;INCOME;Generic B2B;olive;2019-08-04;one-to-one Indiana;7773;36034;ELECTRONIC_TRANSFER;3
+7;VOID;EXPENSE;Licensed Usability models;Personal Loan Account markets;2019-08-04;EXE Rustic Steel Shirt drive;81055;48037;UNSPECIFIED;4
+8;VOID;INCOME;Refined;haptic Producer Agent;2019-08-04;input Accounts;84964;37785;CHECK;3
+9;CLEARED;EXPENSE;SMTP;Checking Account global Steel;2019-08-04;Kyrgyz Republic transmit;52016;30777;CASH;8
+10;VOID;INCOME;digital Corporate Checking Account;seamless New York mesh;2019-08-04;International;34825;54744;ELECTRONIC_TRANSFER;3

@@ -18,7 +18,7 @@ export class TranCategoryResolve implements Resolve<ITranCategory> {
   constructor(private service: TranCategoryService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ITranCategory> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<TranCategory>) => response.ok),

@@ -5,7 +5,7 @@
         "title": "Tran Entries",
         "createLabel": "Create a new Tran Entry",
         "createOrEditLabel": "Create or edit a Tran Entry",
-        "notFound": "No Tran Entry found"
+        "notFound": "No Tran Entries found"
       },
       "created": "A new Tran Entry is created with identifier {{ param }}",
       "updated": "A Tran Entry is updated with identifier {{ param }}",

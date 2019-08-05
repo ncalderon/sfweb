@@ -18,7 +18,7 @@ export class CurrencyResolve implements Resolve<ICurrency> {
   constructor(private service: CurrencyService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ICurrency> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<Currency>) => response.ok),

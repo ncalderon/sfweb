@@ -11,7 +11,7 @@ const LAYOUT_ROUTES = [navbarRoute, ...errorRoute];
       [
         {
           path: 'admin',
-          loadChildren: './admin/admin.module#SfwebAdminModule'
+          loadChildren: () => import('./admin/admin.module').then(m => m.SfwebAdminModule)
         },
         ...LAYOUT_ROUTES
       ],

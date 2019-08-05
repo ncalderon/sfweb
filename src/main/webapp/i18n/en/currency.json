@@ -5,7 +5,7 @@
         "title": "Currencies",
         "createLabel": "Create a new Currency",
         "createOrEditLabel": "Create or edit a Currency",
-        "notFound": "No Currency found"
+        "notFound": "No Currencies found"
       },
       "created": "A new Currency is created with identifier {{ param }}",
       "updated": "A Currency is updated with identifier {{ param }}",

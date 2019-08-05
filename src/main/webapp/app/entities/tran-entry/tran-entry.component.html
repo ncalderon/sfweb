@@ -4,7 +4,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-tran-entry" [routerLink]="['/tran-entry/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="sfwebApp.tranEntry.home.createLabel">
-            Create new Tran Entry
+            Create a new Tran Entry
             </span>
         </button>
     </h2>
@@ -46,12 +46,12 @@
                 <td jhiTranslate="{{'sfwebApp.PaymentMethod.' + tranEntry.paymentMethod}}">{{tranEntry.paymentMethod}}</td>
                 <td>
                     <div *ngIf="tranEntry.finAccId">
-                        <a [routerLink]="['../fin-acc', tranEntry.finAccId , 'view' ]" >{{tranEntry.finAccName}}</a>
+                        <a [routerLink]="['/fin-acc', tranEntry.finAccId , 'view' ]" >{{tranEntry.finAccName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="tranEntry.tranCategoryId">
-                        <a [routerLink]="['../tran-category', tranEntry.tranCategoryId , 'view' ]" >{{tranEntry.tranCategoryName}}</a>
+                        <a [routerLink]="['/tran-category', tranEntry.tranCategoryId , 'view' ]" >{{tranEntry.tranCategoryName}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -69,7 +69,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'tran-entry', { outlets: { popup: tranEntry.id + '/delete'} }]"
+                                [routerLink]="['/tran-entry', { outlets: { popup: tranEntry.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

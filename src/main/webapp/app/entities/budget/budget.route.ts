@@ -18,7 +18,7 @@ export class BudgetResolve implements Resolve<IBudget> {
   constructor(private service: BudgetService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IBudget> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<Budget>) => response.ok),

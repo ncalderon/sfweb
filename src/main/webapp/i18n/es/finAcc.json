@@ -5,7 +5,7 @@
         "title": "Fin Accs",
         "createLabel": "Crear nuevo Fin Acc",
         "createOrEditLabel": "Crear o editar Fin Acc",
-        "notFound": "No Fin Acc found"
+        "notFound": "No Fin Accs found"
       },
       "created": "Un nuevo Fin Acc ha sido creado con el identificador {{ param }}",
       "updated": "Un Fin Acc ha sido actualizado con el identificador {{ param }}",

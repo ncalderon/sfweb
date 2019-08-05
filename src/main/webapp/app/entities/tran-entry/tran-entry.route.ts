@@ -18,7 +18,7 @@ export class TranEntryResolve implements Resolve<ITranEntry> {
   constructor(private service: TranEntryService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ITranEntry> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<TranEntry>) => response.ok),

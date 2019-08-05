@@ -18,7 +18,7 @@ export class UserPreferenceResolve implements Resolve<IUserPreference> {
   constructor(private service: UserPreferenceService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IUserPreference> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<UserPreference>) => response.ok),

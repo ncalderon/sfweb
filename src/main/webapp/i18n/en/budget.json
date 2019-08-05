@@ -5,7 +5,7 @@
         "title": "Budgets",
         "createLabel": "Create a new Budget",
         "createOrEditLabel": "Create or edit a Budget",
-        "notFound": "No Budget found"
+        "notFound": "No Budgets found"
       },
       "created": "A new Budget is created with identifier {{ param }}",
       "updated": "A Budget is updated with identifier {{ param }}",
