@@ -1,0 +1,150 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="sf-tran-entry-heading" jhiTranslate="sfwebApp.tranEntry.home.createOrEditLabel">Create or edit a Tran Entry</h2>
+            <div>
+                <sf-alert-error></sf-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.tranStatus" for="field_tranStatus">Tran Status</label>
+                    <select class="form-control" name="tranStatus" formControlName="tranStatus" id="field_tranStatus">
+                        <option value="RECONCILED">{{'sfwebApp.TranStatus.RECONCILED' | translate}}</option>
+                        <option value="CLEARED">{{'sfwebApp.TranStatus.CLEARED' | translate}}</option>
+                        <option value="UNCLEARED">{{'sfwebApp.TranStatus.UNCLEARED' | translate}}</option>
+                        <option value="VOID">{{'sfwebApp.TranStatus.VOID' | translate}}</option>
+                    </select>
+                    <div *ngIf="editForm.get('tranStatus').invalid && (editForm.get('tranStatus').dirty || editForm.get('tranStatus').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('tranStatus').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.tranType" for="field_tranType">Tran Type</label>
+                    <select class="form-control" name="tranType" formControlName="tranType" id="field_tranType">
+                        <option value="EXPENSE">{{'sfwebApp.TranType.EXPENSE' | translate}}</option>
+                        <option value="INCOME">{{'sfwebApp.TranType.INCOME' | translate}}</option>
+                    </select>
+                    <div *ngIf="editForm.get('tranType').invalid && (editForm.get('tranType').dirty || editForm.get('tranType').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('tranType').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.tranNum" for="field_tranNum">Tran Num</label>
+                    <input type="text" class="form-control" name="tranNum" id="field_tranNum"
+                           formControlName="tranNum"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.refNum" for="field_refNum">Ref Num</label>
+                    <input type="text" class="form-control" name="refNum" id="field_refNum"
+                           formControlName="refNum"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.postDate" for="field_postDate">Post Date</label>
+                    <div class="input-group">
+                        <input id="field_postDate" type="text" class="form-control" name="postDate" ngbDatepicker  #postDateDp="ngbDatepicker" formControlName="postDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="postDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('postDate').invalid && (editForm.get('postDate').dirty || editForm.get('postDate').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('postDate').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 256 }">
+                        This field cannot be longer than 256 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.amount" for="field_amount">Amount</label>
+                    <input type="number" class="form-control" name="amount" id="field_amount"
+                           formControlName="amount"/>
+                    <div *ngIf="editForm.get('amount').invalid && (editForm.get('amount').dirty || editForm.get('amount').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('amount').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('amount')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.ccyVal" for="field_ccyVal">Ccy Val</label>
+                    <input type="number" class="form-control" name="ccyVal" id="field_ccyVal"
+                           formControlName="ccyVal"/>
+                    <div *ngIf="editForm.get('ccyVal').invalid && (editForm.get('ccyVal').dirty || editForm.get('ccyVal').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('ccyVal').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('ccyVal')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.paymentMethod" for="field_paymentMethod">Payment Method</label>
+                    <select class="form-control" name="paymentMethod" formControlName="paymentMethod" id="field_paymentMethod">
+                        <option value="UNSPECIFIED">{{'sfwebApp.PaymentMethod.UNSPECIFIED' | translate}}</option>
+                        <option value="CASH">{{'sfwebApp.PaymentMethod.CASH' | translate}}</option>
+                        <option value="CHECK">{{'sfwebApp.PaymentMethod.CHECK' | translate}}</option>
+                        <option value="CREDIT_CARD">{{'sfwebApp.PaymentMethod.CREDIT_CARD' | translate}}</option>
+                        <option value="DEBIT_CARD">{{'sfwebApp.PaymentMethod.DEBIT_CARD' | translate}}</option>
+                        <option value="ELECTRONIC_TRANSFER">{{'sfwebApp.PaymentMethod.ELECTRONIC_TRANSFER' | translate}}</option>
+                        <option value="OTHER">{{'sfwebApp.PaymentMethod.OTHER' | translate}}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.finAcc" for="field_finAcc">Fin Acc</label>
+                    <select class="form-control" id="field_finAcc" name="finAcc" formControlName="finAccId">
+                        <option *ngIf="!editForm.get('finAccId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="finAccOption.id" *ngFor="let finAccOption of finaccs; trackBy: trackFinAccById">{{finAccOption.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('finAccId').invalid && (editForm.get('finAccId').dirty || editForm.get('finAccId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('finAccId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.tranEntry.tranCategory" for="field_tranCategory">Tran Category</label>
+                    <select class="form-control" id="field_tranCategory" name="tranCategory" formControlName="tranCategoryId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="tranCategoryOption.id" *ngFor="let tranCategoryOption of trancategories; trackBy: trackTranCategoryById">{{tranCategoryOption.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

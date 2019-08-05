@@ -1,0 +1,139 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="sf-fin-acc-heading" jhiTranslate="sfwebApp.finAcc.home.createOrEditLabel">Create or edit a Fin Acc</h2>
+            <div>
+                <sf-alert-error></sf-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id').value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.finAcc.status" for="field_status">Status</label>
+                    <select class="form-control" name="status" formControlName="status" id="field_status">
+                        <option value="INACTIVE">{{'sfwebApp.FinAccStatus.INACTIVE' | translate}}</option>
+                        <option value="ACTIVE">{{'sfwebApp.FinAccStatus.ACTIVE' | translate}}</option>
+                    </select>
+                    <div *ngIf="editForm.get('status').invalid && (editForm.get('status').dirty || editForm.get('status').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('status').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.finAcc.accNum" for="field_accNum">Acc Num</label>
+                    <input type="text" class="form-control" name="accNum" id="field_accNum"
+                           formControlName="accNum"/>
+                    <div *ngIf="editForm.get('accNum').invalid && (editForm.get('accNum').dirty || editForm.get('accNum').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('accNum').errors.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                        This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('accNum').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 64 }">
+                        This field cannot be longer than 64 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.finAcc.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name').errors.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                        This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 64 }">
+                        This field cannot be longer than 64 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.finAcc.description" for="field_description">Description</label>
+                    <input type="text" class="form-control" name="description" id="field_description"
+                           formControlName="description"/>
+                    <div *ngIf="editForm.get('description').invalid && (editForm.get('description').dirty || editForm.get('description').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('description').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 256 }">
+                        This field cannot be longer than 256 characters.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.finAcc.balance" for="field_balance">Balance</label>
+                    <input type="number" class="form-control" name="balance" id="field_balance"
+                           formControlName="balance"/>
+                    <div *ngIf="editForm.get('balance').invalid && (editForm.get('balance').dirty || editForm.get('balance').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('balance').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('balance')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.finAcc.isCreditCard" for="field_isCreditCard">Is Credit Card</label>
+                    <input type="checkbox" class="form-control" name="isCreditCard" id="field_isCreditCard"
+                           formControlName="isCreditCard"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.finAcc.billingCycle" for="field_billingCycle">Billing Cycle</label>
+                    <input type="number" class="form-control" name="billingCycle" id="field_billingCycle"
+                           formControlName="billingCycle"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.finAcc.ccyCode" for="field_ccyCode">Ccy Code</label>
+                    <input type="text" class="form-control" name="ccyCode" id="field_ccyCode"
+                           formControlName="ccyCode"/>
+                    <div *ngIf="editForm.get('ccyCode').invalid && (editForm.get('ccyCode').dirty || editForm.get('ccyCode').touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('ccyCode').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('ccyCode').errors.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 4 }">
+                        This field is required to be at least 4 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('ccyCode').errors.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 64 }">
+                        This field cannot be longer than 64 characters.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="sfwebApp.finAcc.user" for="field_user">User</label>
+                    <select class="form-control" id="field_user" name="user" formControlName="userId">
+                        <option *ngIf="!editForm.get('userId').value" [ngValue]="null" selected></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('userId').invalid && (editForm.get('userId').dirty || editForm.get('userId').touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('userId').errors.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

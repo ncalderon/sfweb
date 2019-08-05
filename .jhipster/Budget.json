@@ -1,0 +1,39 @@
+{
+    "name": "Budget",
+    "fields": [
+        {
+            "fieldName": "amount",
+            "fieldType": "BigDecimal",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "tranCategory",
+            "otherEntityRelationshipName": "budget",
+            "relationshipName": "tranCategory",
+            "otherEntityField": "name",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "period",
+            "otherEntityRelationshipName": "budget",
+            "relationshipValidateRules": "required",
+            "relationshipName": "period",
+            "otherEntityField": "month"
+        }
+    ],
+    "changelogDate": "20190630172922",
+    "entityTableName": "budget",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

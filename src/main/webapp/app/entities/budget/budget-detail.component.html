@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="budget">
+            <h2><span jhiTranslate="sfwebApp.budget.detail.title">Budget</span> {{budget.id}}</h2>
+            <hr>
+            <sf-alert-error></sf-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sfwebApp.budget.amount">Amount</span></dt>
+                <dd>
+                    <span>{{budget.amount}}</span>
+                </dd>
+                <dt><span jhiTranslate="sfwebApp.budget.tranCategory">Tran Category</span></dt>
+                <dd>
+                    <div *ngIf="budget.tranCategoryId">
+                        <a [routerLink]="['/tran-category', budget.tranCategoryId, 'view']">{{budget.tranCategoryName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="sfwebApp.budget.period">Period</span></dt>
+                <dd>
+                    <div *ngIf="budget.periodId">
+                        <a [routerLink]="['/period', budget.periodId, 'view']">{{budget.periodMonth}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/budget', budget.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+{
+    "name": "UserPreference",
+    "fields": [
+        {
+            "fieldName": "value",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "userPreference",
+            "relationshipValidateRules": "required",
+            "relationshipName": "user",
+            "otherEntityField": "login"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "preference",
+            "otherEntityRelationshipName": "userPreference",
+            "relationshipValidateRules": "required",
+            "relationshipName": "preference",
+            "otherEntityField": "name"
+        }
+    ],
+    "changelogDate": "20190630172919",
+    "entityTableName": "user_preference",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

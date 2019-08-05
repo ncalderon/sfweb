@@ -1,0 +1,27 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="period">
+            <h2><span jhiTranslate="sfwebApp.period.detail.title">Period</span> {{period.id}}</h2>
+            <hr>
+            <sf-alert-error></sf-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="sfwebApp.period.month">Month</span></dt>
+                <dd>
+                    <span>{{period.month}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/period', period.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
