@@ -5,7 +5,7 @@
         "title": "Tran Categories",
         "createLabel": "Crear nuevo Tran Category",
         "createOrEditLabel": "Crear o editar Tran Category",
-        "notFound": "No Tran Category found"
+        "notFound": "No Tran Categories found"
       },
       "created": "Un nuevo Tran Category ha sido creado con el identificador {{ param }}",
       "updated": "Un Tran Category ha sido actualizado con el identificador {{ param }}",

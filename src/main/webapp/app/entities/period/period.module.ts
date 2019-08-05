@@ -26,7 +26,7 @@ const ENTITY_STATES = [...periodRoute, ...periodPopupRoute];
 export class SfwebPeriodModule {
   constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
     this.languageHelper.language.subscribe((languageKey: string) => {
-      if (languageKey !== undefined) {
+      if (languageKey) {
         this.languageService.changeLanguage(languageKey);
       }
     });

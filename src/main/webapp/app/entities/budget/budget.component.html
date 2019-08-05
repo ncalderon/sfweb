@@ -4,7 +4,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-budget" [routerLink]="['/budget/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="sfwebApp.budget.home.createLabel">
-            Create new Budget
+            Create a new Budget
             </span>
         </button>
     </h2>
@@ -30,12 +30,12 @@
                 <td>{{budget.amount}}</td>
                 <td>
                     <div *ngIf="budget.tranCategoryId">
-                        <a [routerLink]="['../tran-category', budget.tranCategoryId , 'view' ]" >{{budget.tranCategoryName}}</a>
+                        <a [routerLink]="['/tran-category', budget.tranCategoryId , 'view' ]" >{{budget.tranCategoryName}}</a>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="budget.periodId">
-                        <a [routerLink]="['../period', budget.periodId , 'view' ]" >{{budget.periodMonth}}</a>
+                        <a [routerLink]="['/period', budget.periodId , 'view' ]" >{{budget.periodMonth}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -53,7 +53,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'budget', { outlets: { popup: budget.id + '/delete'} }]"
+                                [routerLink]="['/budget', { outlets: { popup: budget.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

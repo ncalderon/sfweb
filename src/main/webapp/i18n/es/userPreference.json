@@ -5,7 +5,7 @@
         "title": "User Preferences",
         "createLabel": "Crear nuevo User Preference",
         "createOrEditLabel": "Crear o editar User Preference",
-        "notFound": "No User Preference found"
+        "notFound": "No User Preferences found"
       },
       "created": "Un nuevo User Preference ha sido creado con el identificador {{ param }}",
       "updated": "Un User Preference ha sido actualizado con el identificador {{ param }}",

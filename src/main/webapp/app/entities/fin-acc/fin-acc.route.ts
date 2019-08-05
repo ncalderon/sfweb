@@ -18,7 +18,7 @@ export class FinAccResolve implements Resolve<IFinAcc> {
   constructor(private service: FinAccService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IFinAcc> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<FinAcc>) => response.ok),

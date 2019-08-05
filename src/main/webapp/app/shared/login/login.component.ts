@@ -17,7 +17,7 @@ export class SfLoginModalComponent implements AfterViewInit {
   loginForm = this.fb.group({
     username: [''],
     password: [''],
-    rememberMe: [true]
+    rememberMe: [false]
   });
 
   constructor(

@@ -5,7 +5,7 @@
         "title": "Periods",
         "createLabel": "Create a new Period",
         "createOrEditLabel": "Create or edit a Period",
-        "notFound": "No Period found"
+        "notFound": "No Periods found"
       },
       "created": "A new Period is created with identifier {{ param }}",
       "updated": "A Period is updated with identifier {{ param }}",

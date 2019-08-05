@@ -4,7 +4,7 @@
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-preference" [routerLink]="['/user-preference/new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="sfwebApp.userPreference.home.createLabel">
-            Create new User Preference
+            Create a new User Preference
             </span>
         </button>
     </h2>
@@ -33,7 +33,7 @@
                 </td>
                 <td>
                     <div *ngIf="userPreference.preferenceId">
-                        <a [routerLink]="['../preference', userPreference.preferenceId , 'view' ]" >{{userPreference.preferenceName}}</a>
+                        <a [routerLink]="['/preference', userPreference.preferenceId , 'view' ]" >{{userPreference.preferenceName}}</a>
                     </div>
                 </td>
                 <td class="text-right">
@@ -51,7 +51,7 @@
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', 'user-preference', { outlets: { popup: userPreference.id + '/delete'} }]"
+                                [routerLink]="['/user-preference', { outlets: { popup: userPreference.id + '/delete'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
                                 class="btn btn-danger btn-sm">

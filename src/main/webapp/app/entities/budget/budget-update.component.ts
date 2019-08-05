@@ -52,7 +52,7 @@ export class BudgetUpdateComponent implements OnInit {
       )
       .subscribe(
         (res: ITranCategory[]) => {
-          if (!!this.editForm.get('tranCategoryId').value) {
+          if (!this.editForm.get('tranCategoryId').value) {
             this.trancategories = res;
           } else {
             this.tranCategoryService

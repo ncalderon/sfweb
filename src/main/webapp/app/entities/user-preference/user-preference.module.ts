@@ -37,7 +37,7 @@ const ENTITY_STATES = [...userPreferenceRoute, ...userPreferencePopupRoute];
 export class SfwebUserPreferenceModule {
   constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
     this.languageHelper.language.subscribe((languageKey: string) => {
-      if (languageKey !== undefined) {
+      if (languageKey) {
         this.languageService.changeLanguage(languageKey);
       }
     });

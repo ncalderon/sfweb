@@ -18,7 +18,7 @@ export class PeriodResolve implements Resolve<IPeriod> {
   constructor(private service: PeriodService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IPeriod> {
-    const id = route.params['id'] ? route.params['id'] : null;
+    const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
         filter((response: HttpResponse<Period>) => response.ok),
