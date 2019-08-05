@@ -12,7 +12,7 @@ export interface IFinAcc {
   name?: string;
   description?: string;
   balance?: number;
-  isCreditCard?: boolean;
+  creditCard?: boolean;
   billingCycle?: number;
   ccyCode?: string;
   tranEntries?: ITranEntry[];
@@ -28,13 +28,13 @@ export class FinAcc implements IFinAcc {
     public name?: string,
     public description?: string,
     public balance?: number,
-    public isCreditCard?: boolean,
+    public creditCard?: boolean,
     public billingCycle?: number,
     public ccyCode?: string,
     public tranEntries?: ITranEntry[],
     public userLogin?: string,
     public userId?: number
   ) {
-    this.isCreditCard = this.isCreditCard || false;
+    this.creditCard = this.creditCard || false;
   }
 }

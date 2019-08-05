@@ -1,8 +1,8 @@
 /* tslint:disable no-unused-expression */
-import { browser, ExpectedConditions as ec, promise } from 'protractor';
+import { browser, ExpectedConditions as ec } from 'protractor';
 import { NavBarPage, SignInPage } from '../../page-objects/jhi-page-objects';
 
-import { FinAccComponentsPage, FinAccDeleteDialog, FinAccUpdatePage } from './fin-acc.page-object';
+import { FinAccComponentsPage, FinAccUpdatePage } from './fin-acc.page-object';
 
 const expect = chai.expect;
 
@@ -53,13 +53,13 @@ describe('FinAcc e2e test', () => {
         expect(await finAccUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
         expect(await finAccUpdatePage.getDescriptionInput()).to.eq('description', 'Expected Description value to be equals to description');
         expect(await finAccUpdatePage.getBalanceInput()).to.eq('5', 'Expected balance value to be equals to 5');
-        const selectedIsCreditCard = finAccUpdatePage.getIsCreditCardInput();
-        if (await selectedIsCreditCard.isSelected()) {
-            await finAccUpdatePage.getIsCreditCardInput().click();
-            expect(await finAccUpdatePage.getIsCreditCardInput().isSelected(), 'Expected isCreditCard not to be selected').to.be.false;
+        const selectedCreditCard = finAccUpdatePage.getCreditCardInput();
+        if (await selectedCreditCard.isSelected()) {
+            await finAccUpdatePage.getCreditCardInput().click();
+            expect(await finAccUpdatePage.getCreditCardInput().isSelected(), 'Expected creditCard not to be selected').to.be.false;
         } else {
-            await finAccUpdatePage.getIsCreditCardInput().click();
-            expect(await finAccUpdatePage.getIsCreditCardInput().isSelected(), 'Expected isCreditCard to be selected').to.be.true;
+            await finAccUpdatePage.getCreditCardInput().click();
+            expect(await finAccUpdatePage.getCreditCardInput().isSelected(), 'Expected creditCard to be selected').to.be.true;
         }
         expect(await finAccUpdatePage.getBillingCycleInput()).to.eq('5', 'Expected billingCycle value to be equals to 5');
         expect(await finAccUpdatePage.getCcyCodeInput()).to.eq('ccyCode', 'Expected CcyCode value to be equals to ccyCode');

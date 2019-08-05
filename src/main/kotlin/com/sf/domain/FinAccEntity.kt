@@ -1,33 +1,14 @@
 package com.sf.domain
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.sf.domain.enumeration.FinAccStatus
 import org.hibernate.annotations.Cache
 import org.hibernate.annotations.CacheConcurrencyStrategy
-
-import javax.persistence.CascadeType
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
-import javax.persistence.OneToMany
-import javax.persistence.Table
-import javax.validation.constraints.DecimalMax
-import javax.validation.constraints.DecimalMin
-import javax.validation.constraints.Max
-import javax.validation.constraints.Min
-import javax.validation.constraints.NotNull
-import javax.validation.constraints.Pattern
-import javax.validation.constraints.Size
-
 import java.io.Serializable
 import java.math.BigDecimal
-
-import com.sf.domain.enumeration.FinAccStatus
+import javax.persistence.*
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 /**
  * A FinAccEntity.
@@ -63,8 +44,8 @@ class FinAccEntity(
     @Column(name = "balance", precision = 21, scale = 2, nullable = false)
     var balance: BigDecimal? = null,
 
-    @Column(name = "is_credit_card")
-    var isCreditCard: Boolean? = null,
+    @Column(name = "credit_card")
+    var creditCard: Boolean? = null,
 
     @Column(name = "billing_cycle")
     var billingCycle: Int? = null,
@@ -116,7 +97,7 @@ class FinAccEntity(
         ", name='$name'" +
         ", description='$description'" +
         ", balance=$balance" +
-        ", isCreditCard='$isCreditCard'" +
+        ", creditCard='$creditCard'" +
         ", billingCycle=$billingCycle" +
         ", ccyCode='$ccyCode'" +
         "}"

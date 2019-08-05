@@ -46,13 +46,13 @@ describe('Currency e2e test', () => {
     ]);
     expect(await currencyUpdatePage.getCodeInput()).to.eq('code', 'Expected Code value to be equals to code');
     expect(await currencyUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
-    const selectedIsDefault = currencyUpdatePage.getIsDefaultInput();
-    if (await selectedIsDefault.isSelected()) {
-      await currencyUpdatePage.getIsDefaultInput().click();
-      expect(await currencyUpdatePage.getIsDefaultInput().isSelected(), 'Expected isDefault not to be selected').to.be.false;
+    const selectedUserDefault = currencyUpdatePage.getUserDefaultInput();
+    if (await selectedUserDefault.isSelected()) {
+      await currencyUpdatePage.getUserDefaultInput().click();
+      expect(await currencyUpdatePage.getUserDefaultInput().isSelected(), 'Expected userDefault not to be selected').to.be.false;
     } else {
-      await currencyUpdatePage.getIsDefaultInput().click();
-      expect(await currencyUpdatePage.getIsDefaultInput().isSelected(), 'Expected isDefault to be selected').to.be.true;
+      await currencyUpdatePage.getUserDefaultInput().click();
+      expect(await currencyUpdatePage.getUserDefaultInput().isSelected(), 'Expected userDefault to be selected').to.be.true;
     }
     expect(await currencyUpdatePage.getJsonvalInput()).to.eq('jsonval', 'Expected Jsonval value to be equals to jsonval');
     await currencyUpdatePage.save();

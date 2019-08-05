@@ -23,7 +23,9 @@
             <th jhiSortBy="name"><span jhiTranslate="sfwebApp.finAcc.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="sfwebApp.finAcc.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="balance"><span jhiTranslate="sfwebApp.finAcc.balance">Balance</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="isCreditCard"><span jhiTranslate="sfwebApp.finAcc.isCreditCard">Is Credit Card</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="creditCard"><span jhiTranslate="sfwebApp.finAcc.creditCard">Credit Card</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
             <th jhiSortBy="billingCycle"><span jhiTranslate="sfwebApp.finAcc.billingCycle">Billing Cycle</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="ccyCode"><span jhiTranslate="sfwebApp.finAcc.ccyCode">Ccy Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="userLogin"><span jhiTranslate="sfwebApp.finAcc.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -38,7 +40,7 @@
                 <td>{{finAcc.name}}</td>
                 <td>{{finAcc.description}}</td>
                 <td>{{finAcc.balance}}</td>
-                <td>{{finAcc.isCreditCard}}</td>
+                <td>{{finAcc.creditCard}}</td>
                 <td>{{finAcc.billingCycle}}</td>
                 <td>{{finAcc.ccyCode}}</td>
                 <td>

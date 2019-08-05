@@ -24,7 +24,7 @@
             "fieldValidateRulesMaxlength": 64
         },
         {
-            "fieldName": "isDefault",
+          "fieldName": "userDefault",
             "fieldType": "Boolean",
             "fieldValidateRules": [
                 "required"

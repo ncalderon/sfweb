@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ICurrency, Currency } from 'app/shared/model/currency.model';
+import { Currency, ICurrency } from 'app/shared/model/currency.model';
 import { CurrencyService } from './currency.service';
 
 @Component({
@@ -17,7 +17,7 @@ export class CurrencyUpdateComponent implements OnInit {
     id: [],
     code: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(64)]],
     name: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(64)]],
-    isDefault: [null, [Validators.required]],
+    userDefault: [null, [Validators.required]],
     jsonval: [null, [Validators.required]]
   });
 
@@ -35,7 +35,7 @@ export class CurrencyUpdateComponent implements OnInit {
       id: currency.id,
       code: currency.code,
       name: currency.name,
-      isDefault: currency.isDefault,
+      userDefault: currency.userDefault,
       jsonval: currency.jsonval
     });
   }
@@ -60,7 +60,7 @@ export class CurrencyUpdateComponent implements OnInit {
       id: this.editForm.get(['id']).value,
       code: this.editForm.get(['code']).value,
       name: this.editForm.get(['name']).value,
-      isDefault: this.editForm.get(['isDefault']).value,
+      userDefault: this.editForm.get(['userDefault']).value,
       jsonval: this.editForm.get(['jsonval']).value
     };
   }

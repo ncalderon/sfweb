@@ -1,4 +1,4 @@
-import { browser, ExpectedConditions, element, by, ElementFinder } from 'protractor';
+import { by, element, ElementFinder } from 'protractor';
 
 export class CurrencyComponentsPage {
   createButton = element(by.id('jh-create-entity'));
@@ -28,7 +28,7 @@ export class CurrencyUpdatePage {
   cancelButton = element(by.id('cancel-save'));
   codeInput = element(by.id('field_code'));
   nameInput = element(by.id('field_name'));
-  isDefaultInput = element(by.id('field_isDefault'));
+  userDefaultInput = element(by.id('field_userDefault'));
   jsonvalInput = element(by.id('field_jsonval'));
 
   async getPageTitle() {
@@ -51,8 +51,8 @@ export class CurrencyUpdatePage {
     return await this.nameInput.getAttribute('value');
   }
 
-  getIsDefaultInput(timeout?: number) {
-    return this.isDefaultInput;
+  getUserDefaultInput(timeout?: number) {
+    return this.userDefaultInput;
   }
   async setJsonvalInput(jsonval) {
     await this.jsonvalInput.sendKeys(jsonval);

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <databaseChangeLog
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
-                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
     <property name="autoIncrement" value="true"/>
 
@@ -36,7 +34,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="is_credit_card" type="boolean">
+            <column name="credit_card" type="boolean">
                 <constraints nullable="true" />
             </column>
 
@@ -81,7 +79,7 @@
             <column name="name" type="string"/>
             <column name="description" type="string"/>
             <column name="balance" type="numeric"/>
-            <column name="is_credit_card" type="boolean"/>
+            <column name="credit_card" type="boolean"/>
             <column name="billing_cycle" type="numeric"/>
             <column name="ccy_code" type="string"/>
             <column name="user_id" type="numeric"/>

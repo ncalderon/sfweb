@@ -19,7 +19,7 @@ enum TranType {
 }
 
 enum TranStatus {
-	RECONCILED, CLEARED, UNCLEARED, VOID      
+	RECONCILED, CLEARED, UNCLEARED, VOID
 }
 
 enum PaymentMethod {
@@ -42,7 +42,7 @@ entity UserPreference {
 entity Currency {
     code String required minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH),
     name String required minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH),
-    isDefault Boolean required,
+    userDefault Boolean required,
     jsonval String required
 }
 
@@ -52,7 +52,7 @@ entity FinAcc {
     name String required minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH),
     description String maxlength(DEFAULT_DESC_MAX_LENGTH),
     balance BigDecimal required,
-    isCreditCard Boolean,
+    creditCard Boolean,
     billingCycle Integer,
     ccyCode String required minlength(DEFAULT_MIN_LENGTH) maxlength(DEFAULT_MAX_LENGTH)
 }
@@ -93,7 +93,7 @@ entity TranEntry {
 
 
 relationship ManyToOne {
-	UserPreference{user(login) required} to User,  
+	UserPreference{user(login) required} to User,
     FinAcc{user(login) required} to User,
     TranCategory{user(login) required} to User
 }

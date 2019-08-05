@@ -2,23 +2,10 @@ package com.sf.domain
 
 import org.hibernate.annotations.Cache
 import org.hibernate.annotations.CacheConcurrencyStrategy
-
-import javax.persistence.CascadeType
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.Table
-import javax.validation.constraints.DecimalMax
-import javax.validation.constraints.DecimalMin
-import javax.validation.constraints.Max
-import javax.validation.constraints.Min
-import javax.validation.constraints.NotNull
-import javax.validation.constraints.Pattern
-import javax.validation.constraints.Size
-
 import java.io.Serializable
+import javax.persistence.*
+import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 /**
  * A CurrencyEntity.
@@ -43,8 +30,8 @@ class CurrencyEntity(
     var name: String? = null,
 
     @get: NotNull
-    @Column(name = "is_default", nullable = false)
-    var isDefault: Boolean? = null,
+    @Column(name = "user_default", nullable = false)
+    var userDefault: Boolean? = null,
 
     @get: NotNull
     @Column(name = "jsonval", nullable = false)
@@ -68,7 +55,7 @@ class CurrencyEntity(
         "id=$id" +
         ", code='$code'" +
         ", name='$name'" +
-        ", isDefault='$isDefault'" +
+        ", userDefault='$userDefault'" +
         ", jsonval='$jsonval'" +
         "}"
 

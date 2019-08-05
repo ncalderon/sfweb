@@ -20,7 +20,9 @@
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="code"><span jhiTranslate="sfwebApp.currency.code">Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="name"><span jhiTranslate="sfwebApp.currency.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="isDefault"><span jhiTranslate="sfwebApp.currency.isDefault">Is Default</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+                <th jhiSortBy="userDefault"><span jhiTranslate="sfwebApp.currency.userDefault">User Default</span>
+                    <fa-icon [icon]="'sort'"></fa-icon>
+                </th>
             <th jhiSortBy="jsonval"><span jhiTranslate="sfwebApp.currency.jsonval">Jsonval</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
@@ -30,7 +32,7 @@
                 <td><a [routerLink]="['/currency', currency.id, 'view' ]">{{currency.id}}</a></td>
                 <td>{{currency.code}}</td>
                 <td>{{currency.name}}</td>
-                <td>{{currency.isDefault}}</td>
+                <td>{{currency.userDefault}}</td>
                 <td>{{currency.jsonval}}</td>
                 <td class="text-right">
                     <div class="btn-group">

@@ -1,4 +1,4 @@
-import { browser, ExpectedConditions, element, by, ElementFinder } from 'protractor';
+import { by, element, ElementFinder } from 'protractor';
 
 export class FinAccComponentsPage {
   createButton = element(by.id('jh-create-entity'));
@@ -31,7 +31,7 @@ export class FinAccUpdatePage {
   nameInput = element(by.id('field_name'));
   descriptionInput = element(by.id('field_description'));
   balanceInput = element(by.id('field_balance'));
-  isCreditCardInput = element(by.id('field_isCreditCard'));
+  creditCardInput = element(by.id('field_creditCard'));
   billingCycleInput = element(by.id('field_billingCycle'));
   ccyCodeInput = element(by.id('field_ccyCode'));
   userSelect = element(by.id('field_user'));
@@ -87,8 +87,8 @@ export class FinAccUpdatePage {
     return await this.balanceInput.getAttribute('value');
   }
 
-  getIsCreditCardInput(timeout?: number) {
-    return this.isCreditCardInput;
+  getCreditCardInput(timeout?: number) {
+    return this.creditCardInput;
   }
   async setBillingCycleInput(billingCycle) {
     await this.billingCycleInput.sendKeys(billingCycle);

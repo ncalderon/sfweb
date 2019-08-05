@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { JhiAlertService } from 'ng-jhipster';
-import { IFinAcc, FinAcc } from 'app/shared/model/fin-acc.model';
+import { FinAcc, IFinAcc } from 'app/shared/model/fin-acc.model';
 import { FinAccService } from './fin-acc.service';
 import { IUser, UserService } from 'app/core';
 
@@ -25,7 +25,7 @@ export class FinAccUpdateComponent implements OnInit {
     name: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(64)]],
     description: [null, [Validators.maxLength(256)]],
     balance: [null, [Validators.required]],
-    isCreditCard: [],
+    creditCard: [],
     billingCycle: [],
     ccyCode: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(64)]],
     userId: [null, Validators.required]
@@ -61,7 +61,7 @@ export class FinAccUpdateComponent implements OnInit {
       name: finAcc.name,
       description: finAcc.description,
       balance: finAcc.balance,
-      isCreditCard: finAcc.isCreditCard,
+      creditCard: finAcc.creditCard,
       billingCycle: finAcc.billingCycle,
       ccyCode: finAcc.ccyCode,
       userId: finAcc.userId
@@ -91,7 +91,7 @@ export class FinAccUpdateComponent implements OnInit {
       name: this.editForm.get(['name']).value,
       description: this.editForm.get(['description']).value,
       balance: this.editForm.get(['balance']).value,
-      isCreditCard: this.editForm.get(['isCreditCard']).value,
+      creditCard: this.editForm.get(['creditCard']).value,
       billingCycle: this.editForm.get(['billingCycle']).value,
       ccyCode: this.editForm.get(['ccyCode']).value,
       userId: this.editForm.get(['userId']).value

@@ -2,15 +2,14 @@ package com.sf.web.rest
 
 import com.sf.SfwebApp
 import com.sf.domain.FinAccEntity
-import com.sf.domain.UserEntity
+import com.sf.domain.enumeration.FinAccStatus
 import com.sf.repository.FinAccRepository
 import com.sf.service.FinAccService
 import com.sf.service.dto.FinAccDTO
 import com.sf.service.mapper.FinAccMapper
 import com.sf.web.rest.errors.ExceptionTranslator
-
-import kotlin.test.assertNotNull
-
+import org.assertj.core.api.Assertions.assertThat
+import org.hamcrest.Matchers.hasItem
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.MockitoAnnotations
@@ -20,23 +19,14 @@ import org.springframework.data.web.PageableHandlerMethodArgumentResolver
 import org.springframework.http.MediaType
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.validation.Validator
-import javax.persistence.EntityManager
 import java.math.BigDecimal
-
-import org.assertj.core.api.Assertions.assertThat
-import org.hamcrest.Matchers.hasItem
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
-
-import com.sf.domain.enumeration.FinAccStatus
+import javax.persistence.EntityManager
+import kotlin.test.assertNotNull
 
 /**
  * Test class for the FinAccResource REST controller.
@@ -113,7 +103,7 @@ class FinAccResourceIT {
         assertThat(testFinAcc.name).isEqualTo(DEFAULT_NAME)
         assertThat(testFinAcc.description).isEqualTo(DEFAULT_DESCRIPTION)
         assertThat(testFinAcc.balance).isEqualTo(DEFAULT_BALANCE)
-        assertThat(testFinAcc.isCreditCard).isEqualTo(DEFAULT_IS_CREDIT_CARD)
+        assertThat(testFinAcc.creditCard).isEqualTo(DEFAULT_CREDIT_CARD)
         assertThat(testFinAcc.billingCycle).isEqualTo(DEFAULT_BILLING_CYCLE)
         assertThat(testFinAcc.ccyCode).isEqualTo(DEFAULT_CCY_CODE)
     }
@@ -236,11 +226,11 @@ class FinAccResourceIT {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
             .andExpect(jsonPath("$.[*].balance").value(hasItem(DEFAULT_BALANCE.toInt())))
-            .andExpect(jsonPath("$.[*].isCreditCard").value(hasItem(DEFAULT_IS_CREDIT_CARD)))
+            .andExpect(jsonPath("$.[*].creditCard").value(hasItem(DEFAULT_CREDIT_CARD)))
             .andExpect(jsonPath("$.[*].billingCycle").value(hasItem(DEFAULT_BILLING_CYCLE)))
             .andExpect(jsonPath("$.[*].ccyCode").value(hasItem(DEFAULT_CCY_CODE)))
     }
-    
+
     @Test
     @Transactional
     fun getFinAcc() {
@@ -260,7 +250,7 @@ class FinAccResourceIT {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
             .andExpect(jsonPath("$.balance").value(DEFAULT_BALANCE.toInt()))
-            .andExpect(jsonPath("$.isCreditCard").value(DEFAULT_IS_CREDIT_CARD))
+            .andExpect(jsonPath("$.creditCard").value(DEFAULT_CREDIT_CARD))
             .andExpect(jsonPath("$.billingCycle").value(DEFAULT_BILLING_CYCLE))
             .andExpect(jsonPath("$.ccyCode").value(DEFAULT_CCY_CODE))
     }
@@ -292,7 +282,7 @@ class FinAccResourceIT {
         updatedFinAcc.name = UPDATED_NAME
         updatedFinAcc.description = UPDATED_DESCRIPTION
         updatedFinAcc.balance = UPDATED_BALANCE
-        updatedFinAcc.isCreditCard = UPDATED_IS_CREDIT_CARD
+        updatedFinAcc.creditCard = UPDATED_CREDIT_CARD
         updatedFinAcc.billingCycle = UPDATED_BILLING_CYCLE
         updatedFinAcc.ccyCode = UPDATED_CCY_CODE
         val finAccDTO = finAccMapper.toDto(updatedFinAcc)
@@ -312,7 +302,7 @@ class FinAccResourceIT {
         assertThat(testFinAcc.name).isEqualTo(UPDATED_NAME)
         assertThat(testFinAcc.description).isEqualTo(UPDATED_DESCRIPTION)
         assertThat(testFinAcc.balance).isEqualTo(UPDATED_BALANCE)
-        assertThat(testFinAcc.isCreditCard).isEqualTo(UPDATED_IS_CREDIT_CARD)
+        assertThat(testFinAcc.creditCard).isEqualTo(UPDATED_CREDIT_CARD)
         assertThat(testFinAcc.billingCycle).isEqualTo(UPDATED_BILLING_CYCLE)
         assertThat(testFinAcc.ccyCode).isEqualTo(UPDATED_CCY_CODE)
     }
@@ -414,8 +404,8 @@ class FinAccResourceIT {
         private val DEFAULT_BALANCE: BigDecimal = BigDecimal(1)
         private val UPDATED_BALANCE: BigDecimal = BigDecimal(2)
 
-        private const val DEFAULT_IS_CREDIT_CARD: Boolean = false
-        private const val UPDATED_IS_CREDIT_CARD: Boolean = true
+        private const val DEFAULT_CREDIT_CARD: Boolean = false
+        private const val UPDATED_CREDIT_CARD: Boolean = true
 
         private const val DEFAULT_BILLING_CYCLE: Int = 1
         private const val UPDATED_BILLING_CYCLE: Int = 2
@@ -437,7 +427,7 @@ class FinAccResourceIT {
                 name = DEFAULT_NAME,
                 description = DEFAULT_DESCRIPTION,
                 balance = DEFAULT_BALANCE,
-                isCreditCard = DEFAULT_IS_CREDIT_CARD,
+                creditCard = DEFAULT_CREDIT_CARD,
                 billingCycle = DEFAULT_BILLING_CYCLE,
                 ccyCode = DEFAULT_CCY_CODE
             )
@@ -464,7 +454,7 @@ class FinAccResourceIT {
                 name = UPDATED_NAME,
                 description = UPDATED_DESCRIPTION,
                 balance = UPDATED_BALANCE,
-                isCreditCard = UPDATED_IS_CREDIT_CARD,
+                creditCard = UPDATED_CREDIT_CARD,
                 billingCycle = UPDATED_BILLING_CYCLE,
                 ccyCode = UPDATED_CCY_CODE
             )

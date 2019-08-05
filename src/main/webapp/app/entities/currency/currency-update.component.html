@@ -48,12 +48,15 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="sfwebApp.currency.isDefault" for="field_isDefault">Is Default</label>
-                    <input type="checkbox" class="form-control" name="isDefault" id="field_isDefault"
-                           formControlName="isDefault"/>
-                    <div *ngIf="editForm.get('isDefault').invalid && (editForm.get('isDefault').dirty || editForm.get('isDefault').touched)">
+                    <label class="form-control-label" for="field_userDefault"
+                           jhiTranslate="sfwebApp.currency.userDefault">User Default</label>
+                    <input class="form-control" formControlName="userDefault" id="field_userDefault" name="userDefault"
+                           type="checkbox"/>
+                    <div
+                        *ngIf="editForm.get('userDefault').invalid && (editForm.get('userDefault').dirty || editForm.get('userDefault').touched)">
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('isDefault').errors.required" jhiTranslate="entity.validation.required">
+                               *ngIf="editForm.get('userDefault').errors.required"
+                               jhiTranslate="entity.validation.required">
                         This field is required.
                         </small>
                     </div>

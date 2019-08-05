@@ -21,7 +21,7 @@
       "name": "Name",
       "description": "Description",
       "balance": "Balance",
-      "isCreditCard": "Is Credit Card",
+      "creditCard": "Credit Card",
       "billingCycle": "Billing Cycle",
       "ccyCode": "Ccy Code",
       "tranEntry": "Tran Entry",

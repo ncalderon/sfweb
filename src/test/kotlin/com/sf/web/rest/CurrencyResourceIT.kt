@@ -7,9 +7,8 @@ import com.sf.service.CurrencyService
 import com.sf.service.dto.CurrencyDTO
 import com.sf.service.mapper.CurrencyMapper
 import com.sf.web.rest.errors.ExceptionTranslator
-
-import kotlin.test.assertNotNull
-
+import org.assertj.core.api.Assertions.assertThat
+import org.hamcrest.Matchers.hasItem
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.MockitoAnnotations
@@ -19,20 +18,13 @@ import org.springframework.data.web.PageableHandlerMethodArgumentResolver
 import org.springframework.http.MediaType
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.validation.Validator
 import javax.persistence.EntityManager
-
-import org.assertj.core.api.Assertions.assertThat
-import org.hamcrest.Matchers.hasItem
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.content
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+import kotlin.test.assertNotNull
 
 
 /**
@@ -107,7 +99,7 @@ class CurrencyResourceIT {
         val testCurrency = currencyList[currencyList.size - 1]
         assertThat(testCurrency.code).isEqualTo(DEFAULT_CODE)
         assertThat(testCurrency.name).isEqualTo(DEFAULT_NAME)
-        assertThat(testCurrency.isDefault).isEqualTo(DEFAULT_IS_DEFAULT)
+        assertThat(testCurrency.userDefault).isEqualTo(DEFAULT_USER_DEFAULT)
         assertThat(testCurrency.jsonval).isEqualTo(DEFAULT_JSONVAL)
     }
 
@@ -175,10 +167,10 @@ class CurrencyResourceIT {
 
     @Test
     @Transactional
-    fun checkIsDefaultIsRequired() {
+    fun checkUserDefaultIsRequired() {
         val databaseSizeBeforeTest = currencyRepository.findAll().size
         // set the field null
-        currencyEntity.isDefault = null
+        currencyEntity.userDefault = null
 
         // Create the Currency, which fails.
         val currencyDTO = currencyMapper.toDto(currencyEntity)
@@ -226,10 +218,10 @@ class CurrencyResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(currencyEntity.id?.toInt())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE)))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].isDefault").value(hasItem(DEFAULT_IS_DEFAULT)))
+            .andExpect(jsonPath("$.[*].userDefault").value(hasItem(DEFAULT_USER_DEFAULT)))
             .andExpect(jsonPath("$.[*].jsonval").value(hasItem(DEFAULT_JSONVAL)))
     }
-    
+
     @Test
     @Transactional
     fun getCurrency() {
@@ -246,7 +238,7 @@ class CurrencyResourceIT {
             .andExpect(jsonPath("$.id").value(id.toInt()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.isDefault").value(DEFAULT_IS_DEFAULT))
+            .andExpect(jsonPath("$.userDefault").value(DEFAULT_USER_DEFAULT))
             .andExpect(jsonPath("$.jsonval").value(DEFAULT_JSONVAL))
     }
 
@@ -274,7 +266,7 @@ class CurrencyResourceIT {
         em.detach(updatedCurrency)
         updatedCurrency.code = UPDATED_CODE
         updatedCurrency.name = UPDATED_NAME
-        updatedCurrency.isDefault = UPDATED_IS_DEFAULT
+        updatedCurrency.userDefault = UPDATED_USER_DEFAULT
         updatedCurrency.jsonval = UPDATED_JSONVAL
         val currencyDTO = currencyMapper.toDto(updatedCurrency)
 
@@ -290,7 +282,7 @@ class CurrencyResourceIT {
         val testCurrency = currencyList[currencyList.size - 1]
         assertThat(testCurrency.code).isEqualTo(UPDATED_CODE)
         assertThat(testCurrency.name).isEqualTo(UPDATED_NAME)
-        assertThat(testCurrency.isDefault).isEqualTo(UPDATED_IS_DEFAULT)
+        assertThat(testCurrency.userDefault).isEqualTo(UPDATED_USER_DEFAULT)
         assertThat(testCurrency.jsonval).isEqualTo(UPDATED_JSONVAL)
     }
 
@@ -382,8 +374,8 @@ class CurrencyResourceIT {
         private const val DEFAULT_NAME: String = "AAAAAAAAAA"
         private const val UPDATED_NAME = "BBBBBBBBBB"
 
-        private const val DEFAULT_IS_DEFAULT: Boolean = false
-        private const val UPDATED_IS_DEFAULT: Boolean = true
+        private const val DEFAULT_USER_DEFAULT: Boolean = false
+        private const val UPDATED_USER_DEFAULT: Boolean = true
 
         private const val DEFAULT_JSONVAL: String = "AAAAAAAAAA"
         private const val UPDATED_JSONVAL = "BBBBBBBBBB"
@@ -399,7 +391,7 @@ class CurrencyResourceIT {
             val currencyEntity = CurrencyEntity(
                 code = DEFAULT_CODE,
                 name = DEFAULT_NAME,
-                isDefault = DEFAULT_IS_DEFAULT,
+                userDefault = DEFAULT_USER_DEFAULT,
                 jsonval = DEFAULT_JSONVAL
             )
 
@@ -417,7 +409,7 @@ class CurrencyResourceIT {
             val currencyEntity = CurrencyEntity(
                 code = UPDATED_CODE,
                 name = UPDATED_NAME,
-                isDefault = UPDATED_IS_DEFAULT,
+                userDefault = UPDATED_USER_DEFAULT,
                 jsonval = UPDATED_JSONVAL
             )
 

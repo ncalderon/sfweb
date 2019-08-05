@@ -1,11 +1,9 @@
 /* tslint:disable max-line-length */
-import { TestBed, getTestBed } from '@angular/core/testing';
+import { getTestBed, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { of } from 'rxjs';
-import { take, map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { FinAccService } from 'app/entities/fin-acc/fin-acc.service';
-import { IFinAcc, FinAcc, FinAccStatus } from 'app/shared/model/fin-acc.model';
+import { FinAcc, FinAccStatus, IFinAcc } from 'app/shared/model/fin-acc.model';
 
 describe('Service Tests', () => {
   describe('FinAcc Service', () => {
@@ -64,7 +62,7 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             description: 'BBBBBB',
             balance: 1,
-            isCreditCard: true,
+            creditCard: true,
             billingCycle: 1,
             ccyCode: 'BBBBBB'
           },
@@ -89,7 +87,7 @@ describe('Service Tests', () => {
             name: 'BBBBBB',
             description: 'BBBBBB',
             balance: 1,
-            isCreditCard: true,
+            creditCard: true,
             billingCycle: 1,
             ccyCode: 'BBBBBB'
           },
