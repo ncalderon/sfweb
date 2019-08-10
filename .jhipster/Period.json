@@ -1,0 +1,29 @@
+{
+    "name": "Period",
+    "fields": [
+        {
+            "fieldName": "month",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "budget",
+            "otherEntityRelationshipName": "period",
+            "relationshipName": "budget"
+        }
+    ],
+    "changelogDate": "20190630172923",
+    "entityTableName": "period",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

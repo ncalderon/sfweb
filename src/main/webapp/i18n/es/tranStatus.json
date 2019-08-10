@@ -1,0 +1,11 @@
+{
+  "sfwebApp": {
+    "TranStatus": {
+      "null": "",
+      "RECONCILED": "RECONCILED",
+      "CLEARED": "CLEARED",
+      "UNCLEARED": "UNCLEARED",
+      "VOID": "VOID"
+    }
+  }
+}

@@ -1,0 +1,77 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="sfwebApp.budget.home.title">Budgets</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-budget" [routerLink]="['/budget/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="sfwebApp.budget.home.createLabel">
+            Create a new Budget
+            </span>
+        </button>
+    </h2>
+    <sf-alert></sf-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="budgets?.length === 0">
+        <span jhiTranslate="sfwebApp.budget.home.notFound">No budgets found</span>
+    </div>
+    <div class="table-responsive" *ngIf="budgets?.length > 0">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="amount"><span jhiTranslate="sfwebApp.budget.amount">Amount</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="tranCategoryName"><span jhiTranslate="sfwebApp.budget.tranCategory">Tran Category</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="periodMonth"><span jhiTranslate="sfwebApp.budget.period">Period</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let budget of budgets ;trackBy: trackId">
+                <td><a [routerLink]="['/budget', budget.id, 'view' ]">{{budget.id}}</a></td>
+                <td>{{budget.amount}}</td>
+                <td>
+                    <div *ngIf="budget.tranCategoryId">
+                        <a [routerLink]="['/tran-category', budget.tranCategoryId , 'view' ]" >{{budget.tranCategoryName}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="budget.periodId">
+                        <a [routerLink]="['/period', budget.periodId , 'view' ]" >{{budget.periodMonth}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/budget', budget.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/budget', budget.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/budget', { outlets: { popup: budget.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div [hidden]="budgets?.length === 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>
