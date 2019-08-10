@@ -339,14 +339,6 @@
         </dependency>
         <!-- Spring Cloud -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-cloud-connectors</artifactId>
         </dependency>
@@ -413,7 +405,7 @@
             </testResource>
         </testResources>
         <plugins>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -1243,18 +1235,6 @@
                     </plugin>
                 </plugins>
             </build>
-        </profile>
-        <profile>
-            <!--
-                Profile for tracing requests with Zipkin.
-            -->
-            <id>zipkin</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-starter-zipkin</artifactId>
-                </dependency>
-            </dependencies>
         </profile>
         <profile>
             <!--

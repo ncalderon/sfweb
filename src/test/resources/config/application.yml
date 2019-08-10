@@ -13,13 +13,6 @@
 # http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 # ===================================================================
 
-eureka:
-  client:
-    enabled: false
-  instance:
-    appname: sfweb
-    instanceId: sfweb:${spring.application.instance-id:${random.value}}
-
 spring:
   application:
     name: sfweb
