@@ -1,0 +1,49 @@
+language:
+  - java
+services:
+  - docker
+jdk:
+  - openjdk11
+branches:
+  except:
+    - legacy
+    - experimental
+cache:
+  directories:
+    - '$HOME/.m2'
+    - node_modules
+sudo: required
+dist: bionic
+addons:
+  ssh_known_hosts:
+    - calderonlabs.com
+  apt:
+    packages:
+      - docker-ce
+      - sshpass
+before_install:
+  - chmod +x ./travisci/scripts/script.sh
+  - chmod +x ./travisci/scripts/before_install.sh
+  - chmod +x ./travisci/scripts/install.sh
+  - chmod +x ./travisci/scripts/before_deploy.sh
+  - chmod +x ./travisci/scripts/deploy.sh
+  - chmod +x ./mvnw
+  - './travisci/scripts/before_install.sh'
+install: './travisci/scripts/install.sh'
+before_script:
+  - true
+script:
+  - './travisci/scripts/script.sh'
+before_deploy:
+  - './travisci/scripts/before_deploy.sh'
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: './travisci/scripts/deploy.sh'
+    on:
+      branch: develop
+  - provider: script
+    skip_cleanup: true
+    script: './travisci/scripts/deploy.sh'
+    on:
+      branch: master
