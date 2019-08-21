@@ -1,15 +1,14 @@
 package com.sf.web.rest
 
-
 import com.sf.SfwebApp
 import com.sf.domain.FinAccEntity
 import com.sf.domain.TranCategoryEntity
 import com.sf.domain.TranEntryEntity
 import com.sf.repository.TranEntryRepository
 import com.sf.service.data.DataService
-import com.sf.service.data.ImportType
-import com.sf.service.dto.ImportDTO
-import com.sf.service.mapper.ImportMapper
+import com.sf.service.data.TranDefaultReader
+import com.sf.service.data.TranFile
+import com.sf.service.data.TranFileType
 import com.sf.web.rest.errors.ExceptionTranslator
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
@@ -37,13 +36,12 @@ import javax.persistence.EntityManager
 class DataResourceIT {
 
     @Autowired
+    private lateinit var tranDefaultReader: TranDefaultReader
+    @Autowired
     private lateinit var dataService: DataService
 
     @Autowired
     private lateinit var tranEntryRepository: TranEntryRepository
-
-    @Autowired
-    private lateinit var importMapper: ImportMapper
 
     @Autowired
     private lateinit var jacksonMessageConverter: MappingJackson2HttpMessageConverter
@@ -65,8 +63,8 @@ class DataResourceIT {
 
     private lateinit var tranCategory: TranCategoryEntity
     private lateinit var finAcc: FinAccEntity
-    private lateinit var tranFile: InputStream
-    private lateinit var importType: ImportType
+    private lateinit var tranFileIs: InputStream
+    private lateinit var tranFileType: TranFileType
     private lateinit var mockTranFile: MockMultipartFile
 
     @BeforeEach
@@ -86,13 +84,13 @@ class DataResourceIT {
     fun initTest() {
         tranCategory = createCategory()
         finAcc = createFinAcc()
-        tranFile = createTranFile()
-        mockTranFile = MockMultipartFile("file", "transactions.csv", TEXT_PLAIN_VALUE, tranFile.readAllBytes())
-        importType = ImportType.TRANSACTION
+        tranFileType = TranFileType.DEFAULT
+        tranFileIs = createTranFileIs()
+        mockTranFile = MockMultipartFile("file", "transactions.csv", TEXT_PLAIN_VALUE, tranFileIs.readAllBytes())
 
     }
 
-    private fun createTranFile(): InputStream {
+    private fun createTranFileIs(): InputStream {
         var byteArrayOutputStream = ByteArrayOutputStream()
         var pw = PrintWriter(byteArrayOutputStream)
         pw.println("tran_status;tran_type;tran_num;ref_num;post_date;description;amount;ccy_val;payment_method")
@@ -128,24 +126,28 @@ class DataResourceIT {
         return tranCategory
     }
 
-    private fun getImportDTO(): ImportDTO {
-        return importMapper.toDto(finAcc.id, importType, tranFile)
+    private fun getTranFile(): TranFile {
+        finAcc.id?.let {
+            return TranFile(it, tranFileType, createTranFileIs())
+        }
+        throw IllegalStateException()
     }
+
 
     @Test
     @Transactional
     fun importTransactions() {
         val databaseSizeBeforeCreate = tranEntryRepository.findAll().size
 
-        val importDTO = getImportDTO()
         this.restMockMvc.perform(
             multipart("/api/import/transaction")
                 .file(mockTranFile)
                 .param("finAccId", finAcc.id.toString())
+                .param("tranFileType", TranFileType.DEFAULT.name)
         ).andExpect(status().isOk)
 
         // Validate the TranEntry in the database
-        val transactionsToImport: List<TranEntryEntity> = getTransactionFromFile()
+        val transactionsToImport: List<TranEntryEntity> = tranDefaultReader.read(getTranFile())
         val tranEntryList = tranEntryRepository.findAll()
         assertThat(tranEntryList).hasSize(databaseSizeBeforeCreate + transactionsToImport.size)
         for (i in transactionsToImport.indices) {
@@ -160,5 +162,6 @@ class DataResourceIT {
             assertThat(tranEntryList[i].paymentMethod).isEqualTo(transactionsToImport[i].paymentMethod)
         }
     }
+
 
 }
