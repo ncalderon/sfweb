@@ -102,6 +102,18 @@ class DataResourceIT {
         return ByteArrayInputStream(byteArrayOutputStream.toByteArray())
     }
 
+    private fun createMalFormedTranFileIs(): InputStream {
+        var byteArrayOutputStream = ByteArrayOutputStream()
+        var pw = PrintWriter(byteArrayOutputStream)
+        pw.println("tran_status;tran_type;tran_num;ref_num;post_date;description;amount;ccy_val;payment_method")
+        pw.println("0000001;0000001;2019-08-04;Transaction 1;1000;50;CASH;CLEARED;EXPENSE")
+        pw.println("Transaction 2;2000;50;CREDIT_CARD;CLEARED;EXPENSE;0000002;0000002;2019-08-05")
+        pw.println("CLEARED;INCOME;0000003;0000003;2019-08-06;Transaction 3;3000;100;ELECTRONIC_TRANSFER")
+        pw.flush()
+        pw.close()
+        return ByteArrayInputStream(byteArrayOutputStream.toByteArray())
+    }
+
     private fun createFinAcc(): FinAccEntity {
         val finAcc: FinAccEntity
         if (em.findAll(FinAccEntity::class).isEmpty()) {
@@ -139,6 +151,7 @@ class DataResourceIT {
     fun importTransactions() {
         val databaseSizeBeforeCreate = tranEntryRepository.findAll().size
 
+        val tranFile = MockMultipartFile("file", "transactions.csv", TEXT_PLAIN_VALUE, createMalFormedTranFileIs().readAllBytes())
         this.restMockMvc.perform(
             multipart("/api/import/transaction")
                 .file(mockTranFile)
@@ -163,5 +176,33 @@ class DataResourceIT {
         }
     }
 
+    @Test
+    @Transactional
+    fun importTransactionsWithMalFormedFile() {
+        val databaseSizeBeforeCreate = tranEntryRepository.findAll().size
+
+        this.restMockMvc.perform(
+            multipart("/api/import/transaction")
+                .file(mockTranFile)
+                .param("finAccId", finAcc.id.toString())
+                .param("tranFileType", TranFileType.DEFAULT.name)
+        ).andExpect(status().isOk)
+
+        // Validate the TranEntry in the database
+        val transactionsToImport: List<TranEntryEntity> = tranDefaultReader.read(getTranFile())
+        val tranEntryList = tranEntryRepository.findAll()
+        assertThat(tranEntryList).hasSize(databaseSizeBeforeCreate + transactionsToImport.size)
+        for (i in transactionsToImport.indices) {
+            assertThat(tranEntryList[i].tranStatus).isNotEqualTo(transactionsToImport[i].tranStatus)
+            assertThat(tranEntryList[i].tranType).isNotEqualTo(transactionsToImport[i].tranType)
+            assertThat(tranEntryList[i].tranNum).isNotEqualTo(transactionsToImport[i].tranNum)
+            assertThat(tranEntryList[i].refNum).isNotEqualTo(transactionsToImport[i].refNum)
+            assertThat(tranEntryList[i].postDate).isNotEqualTo(transactionsToImport[i].postDate)
+            assertThat(tranEntryList[i].description).isNotEqualTo(transactionsToImport[i].description)
+            assertThat(tranEntryList[i].amount).isNotEqualTo(transactionsToImport[i].amount)
+            assertThat(tranEntryList[i].ccyVal).isNotEqualTo(transactionsToImport[i].ccyVal)
+            assertThat(tranEntryList[i].paymentMethod).isNotEqualTo(transactionsToImport[i].paymentMethod)
+        }
+    }
 
 }
