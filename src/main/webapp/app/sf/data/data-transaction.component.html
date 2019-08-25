@@ -1,0 +1,16 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form (ngSubmit)="save()" [formGroup]="editForm" name="editForm" novalidate role="form">
+            <h2 id="sf-data-transaction-heading" jhiTranslate="sfwebApp.data.transaction.headingLabel">Import
+                transactions</h2>
+            <div>
+                <sf-alert-error></sf-alert-error>
+                <div [hidden]="!editForm.get('id').value" class="form-group">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input class="form-control" formControlName="id" id="id" name="id" readonly
+                           type="text"/>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

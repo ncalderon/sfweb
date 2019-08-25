@@ -16,18 +16,23 @@ import java.util.stream.Collectors
 class TranDefaultReader {
     private val SEPARATOR = ";"
     private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    @Throws(ProcessDataException::class)
     fun read(tranFile: TranFile): List<TranEntryEntity> {
-        var finAcc = FinAccEntity()
-        finAcc.id = tranFile.finAccId
-        return tranFile.tranFileIs.bufferedReader(Charsets.UTF_8)
-            .lines()
-            .skip(1)
-            .map(LineToTranEntry())
-            .map {
-                it.finAcc = finAcc
-                it
-            }
-            .collect(Collectors.toList())
+        try {
+            var finAcc = FinAccEntity()
+            finAcc.id = tranFile.finAccId
+            return tranFile.tranFileIs.bufferedReader(Charsets.UTF_8)
+                .lines()
+                .skip(1)
+                .map(LineToTranEntry())
+                .map {
+                    it.finAcc = finAcc
+                    it
+                }
+                .collect(Collectors.toList())
+        } catch (ex: Exception) {
+            throw ProcessDataException(ex.message)
+        }
     }
 
     private inner class LineToTranEntry : Function<String, TranEntryEntity> {

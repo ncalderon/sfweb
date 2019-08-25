@@ -63,9 +63,9 @@ class DataResourceIT {
 
     private lateinit var tranCategory: TranCategoryEntity
     private lateinit var finAcc: FinAccEntity
-    private lateinit var tranFileIs: InputStream
     private lateinit var tranFileType: TranFileType
     private lateinit var mockTranFile: MockMultipartFile
+    private lateinit var mockWrongFormatTranFile: MockMultipartFile
 
     @BeforeEach
     fun setup() {
@@ -85,8 +85,8 @@ class DataResourceIT {
         tranCategory = createCategory()
         finAcc = createFinAcc()
         tranFileType = TranFileType.DEFAULT
-        tranFileIs = createTranFileIs()
-        mockTranFile = MockMultipartFile("file", "transactions.csv", TEXT_PLAIN_VALUE, tranFileIs.readAllBytes())
+        mockTranFile = MockMultipartFile("file", "transactions.csv", TEXT_PLAIN_VALUE, createTranFileIs())
+        mockWrongFormatTranFile = MockMultipartFile("file", "transactions.csv", TEXT_PLAIN_VALUE, createWrongFormatTranFileIs().readAllBytes())
 
     }
 
@@ -102,7 +102,7 @@ class DataResourceIT {
         return ByteArrayInputStream(byteArrayOutputStream.toByteArray())
     }
 
-    private fun createMalFormedTranFileIs(): InputStream {
+    private fun createWrongFormatTranFileIs(): InputStream {
         var byteArrayOutputStream = ByteArrayOutputStream()
         var pw = PrintWriter(byteArrayOutputStream)
         pw.println("tran_status;tran_type;tran_num;ref_num;post_date;description;amount;ccy_val;payment_method")
@@ -145,13 +145,18 @@ class DataResourceIT {
         throw IllegalStateException()
     }
 
+    private fun getWrongFormatTranFile(): TranFile {
+        finAcc.id?.let {
+            return TranFile(it, tranFileType, createWrongFormatTranFileIs())
+        }
+        throw IllegalStateException()
+    }
 
     @Test
     @Transactional
     fun importTransactions() {
         val databaseSizeBeforeCreate = tranEntryRepository.findAll().size
 
-        val tranFile = MockMultipartFile("file", "transactions.csv", TEXT_PLAIN_VALUE, createMalFormedTranFileIs().readAllBytes())
         this.restMockMvc.perform(
             multipart("/api/import/transaction")
                 .file(mockTranFile)
@@ -178,31 +183,19 @@ class DataResourceIT {
 
     @Test
     @Transactional
-    fun importTransactionsWithMalFormedFile() {
+    fun importTransactionsWithWrongFormatFile() {
         val databaseSizeBeforeCreate = tranEntryRepository.findAll().size
 
         this.restMockMvc.perform(
             multipart("/api/import/transaction")
-                .file(mockTranFile)
+                .file(mockWrongFormatTranFile)
                 .param("finAccId", finAcc.id.toString())
                 .param("tranFileType", TranFileType.DEFAULT.name)
-        ).andExpect(status().isOk)
+        ).andExpect(status().isBadRequest)
 
         // Validate the TranEntry in the database
-        val transactionsToImport: List<TranEntryEntity> = tranDefaultReader.read(getTranFile())
         val tranEntryList = tranEntryRepository.findAll()
-        assertThat(tranEntryList).hasSize(databaseSizeBeforeCreate + transactionsToImport.size)
-        for (i in transactionsToImport.indices) {
-            assertThat(tranEntryList[i].tranStatus).isNotEqualTo(transactionsToImport[i].tranStatus)
-            assertThat(tranEntryList[i].tranType).isNotEqualTo(transactionsToImport[i].tranType)
-            assertThat(tranEntryList[i].tranNum).isNotEqualTo(transactionsToImport[i].tranNum)
-            assertThat(tranEntryList[i].refNum).isNotEqualTo(transactionsToImport[i].refNum)
-            assertThat(tranEntryList[i].postDate).isNotEqualTo(transactionsToImport[i].postDate)
-            assertThat(tranEntryList[i].description).isNotEqualTo(transactionsToImport[i].description)
-            assertThat(tranEntryList[i].amount).isNotEqualTo(transactionsToImport[i].amount)
-            assertThat(tranEntryList[i].ccyVal).isNotEqualTo(transactionsToImport[i].ccyVal)
-            assertThat(tranEntryList[i].paymentMethod).isNotEqualTo(transactionsToImport[i].paymentMethod)
-        }
+        assertThat(tranEntryList).hasSize(databaseSizeBeforeCreate)
     }
 
 }
